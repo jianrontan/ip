@@ -1,8 +1,8 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class KirkStein {
-    private static Task[] list = new Task[100];
-    private static int index = 0;
+    private static ArrayList<Task> list = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -29,6 +29,10 @@ public class KirkStein {
             // Unmark item
             else if (userInput.startsWith("unmark")) {
                 handleUnmark(userInput);
+            }
+            // Delete item
+            else if (userInput.startsWith("delete")) {
+                handleDelete(userInput);
             }
             // Add to list
             else {
@@ -58,8 +62,8 @@ public class KirkStein {
         String printList = "____________________________________________________________\n"
                 + "Here are your Epstein files:";
         System.out.println(printList);
-        for (int i = 0; i < index; i++) {
-            System.out.println(i + 1 + "." + list[i].toString());
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(i + 1 + "." + list.get(i).toString());
         }
         System.out.println("____________________________________________________________");
     }
@@ -67,32 +71,50 @@ public class KirkStein {
     private static void handleMark(String userInput) {
         try {
             int mark = Integer.parseInt(userInput.substring(5));
-            list[mark - 1].markTrue();
+            list.get(mark - 1).markTrue();
             String markDone = "____________________________________________________________\n"
                     + "Nice! I've marked this as redacted:";
             System.out.println(markDone);
-            System.out.println(list[mark - 1].toString());
+            System.out.println(list.get(mark - 1).toString());
             System.out.println("____________________________________________________________");
         }
         // Add to list
         catch (Exception e) {
-            handleAdd(userInput);
+            printError("Invalid mark command! Use: mark <task number>");
         }
     }
 
     private static void handleUnmark(String userInput) {
         try {
             int unmark = Integer.parseInt(userInput.substring(7));
-            list[unmark - 1].markFalse();
+            list.get(unmark - 1).markFalse();
             String markUndone = "____________________________________________________________\n"
                     + "OK! I've unredacted this:";
             System.out.println(markUndone);
-            System.out.println(list[unmark - 1].toString());
+            System.out.println(list.get(unmark - 1).toString());
             System.out.println("____________________________________________________________");
         }
         // Add to list
         catch (Exception e) {
-            handleAdd(userInput);
+            printError("Invalid unmark command! Use: unmark <task number>");
+        }
+    }
+
+    private static void handleDelete(String userInput) {
+        try {
+            int taskNum = Integer.parseInt(userInput.substring(7).trim());
+            if (taskNum < 1 || taskNum > list.size()) {
+                printError("Invalid Epstein file page!");
+                return;
+            }
+            Task removedTask = list.remove(taskNum - 1);  // remove() returns the removed item
+            System.out.println("____________________________________________________________");
+            System.out.println("Noted. I've removed this file:");
+            System.out.println("  " + removedTask.toString());
+            System.out.println("Now you have " + list.size() + " files in the list.");
+            System.out.println("____________________________________________________________");
+        } catch (Exception e) {
+            printError("Invalid delete command! Use: delete <task number>");
         }
     }
 
@@ -159,12 +181,11 @@ public class KirkStein {
     }
 
     private static void addTask(Task task) {
-        list[index] = task;
-        index++;
+        list.add(task);
         System.out.println("____________________________________________________________");
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task.toString());
-        System.out.println("Now you have " + index + " tasks in the list.");
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
         System.out.println("____________________________________________________________");
     }
 
