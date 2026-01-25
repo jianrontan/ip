@@ -103,6 +103,8 @@ public class KirkStein {
             handleDeadline(userInput);
         } else if (userInput.startsWith("event ")) {
             handleEvent(userInput);
+        } else {
+            printError("That can't be part of the Epstein files diddy blud! It has to start with todo, deadline, or event");
         }
     }
 
