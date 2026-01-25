@@ -103,6 +103,12 @@ public class KirkStein {
             handleDeadline(userInput);
         } else if (userInput.startsWith("event ")) {
             handleEvent(userInput);
+        } else if (userInput.startsWith("todo")) {
+            printError("Epstein todo description cannot be empty!");
+        } else if (userInput.startsWith("deadline")) {
+            printError("Invalid kirk deadline format! Use: deadline <task> /by <date>");
+        } else if (userInput.startsWith("event")) {
+            printError("Invalid diddy party format! Use: event <task> /from <start> /to <end>");
         } else {
             printError("That can't be part of the Epstein files diddy blud! It has to start with todo, deadline, or event");
         }
