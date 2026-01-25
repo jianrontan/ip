@@ -1,7 +1,6 @@
 public class Task {
     private final String description;
-    private final String Type;
-    private final boolean marked;
+    private boolean marked;
 
     Task(String description) {
         this.description = description;
@@ -13,15 +12,15 @@ public class Task {
         this.marked = marked;
     }
 
-    public Task markTrue() {
-        return new Task(this.description, true);
+    public void markTrue() {
+        this.marked = true;
     }
 
-    public Task markFalse() {
-        return new Task(this.description, false);
+    public void markFalse() {
+        this.marked = false;
     }
 
-    public String printTask() {
+    public String toString() {
         if (this.marked) {
             return "[X] " + this.description;
         } else {
