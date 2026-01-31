@@ -4,53 +4,65 @@ Welcome to my island!
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [T][ ] borrow book
-Now you have 1 tasks in the list.
+  [T][ ] kill netanyahu
+Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [D][ ] return book (by: Sunday)
-Now you have 2 tasks in the list.
+  [D][ ] takeover greenland (by: Aug 15 2026)
+Now you have 5 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [E][ ] project meeting (from: Mon 2pm to: 4pm)
-Now you have 3 tasks in the list.
+  [D][ ] takeover argentina (by: Nov 11 2026)
+Now you have 6 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
+Now you have 7 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are your Epstein files:
-1.[T][ ] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+1.[T][X] kill netanyahu
+2.[D][X] takeover greenland (by: Aug 15 2026)
+3.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
+4.[T][ ] kill netanyahu
+5.[D][ ] takeover greenland (by: Aug 15 2026)
+6.[D][ ] takeover argentina (by: Nov 11 2026)
+7.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this as redacted:
-[T][X] borrow book
+[T][X] kill netanyahu
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked this as redacted:
+[D][X] takeover greenland (by: Aug 15 2026)
 ____________________________________________________________
 ____________________________________________________________
 Here are your Epstein files:
-1.[T][X] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+1.[T][X] kill netanyahu
+2.[D][X] takeover greenland (by: Aug 15 2026)
+3.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
+4.[T][ ] kill netanyahu
+5.[D][ ] takeover greenland (by: Aug 15 2026)
+6.[D][ ] takeover argentina (by: Nov 11 2026)
+7.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this file:
-  [D][ ] return book (by: Sunday)
-Now you have 2 files in the list.
+  [E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
+Now you have 6 files in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are your Epstein files:
-1.[T][X] borrow book
-2.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-____________________________________________________________
-____________________________________________________________
-OK! I've unredacted this:
-[T][ ] borrow book
-____________________________________________________________
-____________________________________________________________
-Here are your Epstein files:
-1.[T][ ] borrow book
-2.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+1.[T][X] kill netanyahu
+2.[D][X] takeover greenland (by: Aug 15 2026)
+3.[T][ ] kill netanyahu
+4.[D][ ] takeover greenland (by: Aug 15 2026)
+5.[D][ ] takeover argentina (by: Nov 11 2026)
+6.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
 ____________________________________________________________
 ____________________________________________________________
 Bye! See you in the files.

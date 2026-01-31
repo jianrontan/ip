@@ -1,11 +1,11 @@
-todo borrow book
-deadline return book /by Sunday
-event project meeting /from Mon 2pm /to 4pm
+todo kill netanyahu
+deadline takeover greenland /by 15/08/2026
+deadline takeover argentina /by 2026/11/11
+event bomb iran /from 01/03/2003 /to 15/07/2011
 list
 mark 1
+mark 2
 list
-delete 2
-list
-unmark 1
+delete 3
 list
 bye
