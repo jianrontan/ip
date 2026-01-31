@@ -1,10 +1,19 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
 
 public class KirkStein {
-    private static ArrayList<Task> list = new ArrayList<>();
+    private static ArrayList<Task> list;
+    private static Storage storage;
 
     public static void main(String[] args) {
+        File directory = new File("data");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        storage = new Storage("data/tasks.txt");
+        list = storage.loadTask();
+
         Scanner input = new Scanner(System.in);
         printWelcome();
 
@@ -72,6 +81,7 @@ public class KirkStein {
         try {
             int mark = Integer.parseInt(userInput.substring(5));
             list.get(mark - 1).markTrue();
+            storage.saveTask(list);
             String markDone = "____________________________________________________________\n"
                     + "Nice! I've marked this as redacted:";
             System.out.println(markDone);
@@ -88,6 +98,7 @@ public class KirkStein {
         try {
             int unmark = Integer.parseInt(userInput.substring(7));
             list.get(unmark - 1).markFalse();
+            storage.saveTask(list);
             String markUndone = "____________________________________________________________\n"
                     + "OK! I've unredacted this:";
             System.out.println(markUndone);
@@ -108,6 +119,7 @@ public class KirkStein {
                 return;
             }
             Task removedTask = list.remove(taskNum - 1);  // remove() returns the removed item
+            storage.saveTask(list);
             System.out.println("____________________________________________________________");
             System.out.println("Noted. I've removed this file:");
             System.out.println("  " + removedTask.toString());
@@ -182,6 +194,7 @@ public class KirkStein {
 
     private static void addTask(Task task) {
         list.add(task);
+        storage.saveTask(list);
         System.out.println("____________________________________________________________");
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task.toString());
