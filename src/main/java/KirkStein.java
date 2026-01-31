@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class KirkStein {
     private static ArrayList<Task> list;
@@ -158,6 +161,18 @@ public class KirkStein {
         addTask(task);
     }
 
+    private static LocalDate parseDate(String date) throws DateTimeParseException {
+        try {
+            return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        } catch (DateTimeParseException e1) {
+            try {
+                return LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            } catch (DateTimeParseException e2) {
+                throw new DateTimeParseException("Invalid date format", date, 0);
+            }
+        }
+    }
+
     private static void handleDeadline(String userInput) {
         try {
             String[] parts = userInput.substring(9).split(" /by ");
@@ -165,10 +180,13 @@ public class KirkStein {
                 printError("Invalid kirk deadline format! Use: deadline <task> /by <date>");
                 return;
             }
-            Task task = new Deadline(parts[0].trim(), parts[1].trim());
+            LocalDate byDate = parseDate(parts[1].trim());
+            Task task = new Deadline(parts[0].trim(), byDate);
             addTask(task);
+        } catch (DateTimeParseException e) {
+            printError("Invalid date format! Use yyyy/mm/dd or dd/mm/yyyy");
         } catch (Exception e) {
-            printError("Invalid kirk deadline format!");
+            printError("Invalid deadline format!");
         }
     }
 
@@ -185,7 +203,11 @@ public class KirkStein {
                 printError("Invalid diddy party format! Use: event <task> /from <start> /to <end>");
                 return;
             }
-            Task task = new Event(parts1[0].trim(), parts2[0].trim(), parts2[1].trim());
+
+            LocalDate fromDate = parseDate(parts2[0].trim());
+            LocalDate toDate = parseDate(parts2[1].trim());
+
+            Task task = new Event(parts1[0].trim(), fromDate, toDate);
             addTask(task);
         } catch (Exception e) {
             printError("Invalid diddy party format!");
