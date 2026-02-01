@@ -13,7 +13,11 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.TXT
-text-ui-test/EXPECTED-UNIX.TXT
-
+# Exclude class files
 *.class
+
+# Exclude test files
+/text-ui-test/ACTUAL.TXT
+/text-ui-test/EXPECTED-UNIX.TXT
+/data/tasks.txt
+/text-ui-test/data/tasks.txt
