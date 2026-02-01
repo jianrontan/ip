@@ -1,14 +1,13 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class KirkStein {
-    private static ArrayList<Task> list;
     private static Storage storage;
     private static Ui ui;
+    private static TaskList taskList;
 
     public static void main(String[] args) {
         ui = new Ui();
@@ -18,7 +17,7 @@ public class KirkStein {
             directory.mkdir();
         }
         storage = new Storage("data/tasks.txt");
-        list = storage.loadTask();
+        taskList = new TaskList(storage.loadTask());
 
         Scanner input = new Scanner(System.in);
         ui.showWelcome();
@@ -35,7 +34,7 @@ public class KirkStein {
             }
             // Display list
             else if (userInput.equals("list")) {
-                ui.showTaskList(list);
+                ui.showTaskList(taskList.getTasks());
             }
             // Mark item
             else if (userInput.startsWith("mark")) {
@@ -60,9 +59,9 @@ public class KirkStein {
     private static void handleMark(String userInput) {
         try {
             int taskNumber = Parser.parseTaskNumber(userInput, 5);
-            list.get(taskNumber - 1).markTrue();
-            storage.saveTask(list);
-            ui.showTaskMarked(list.get(taskNumber - 1));
+            taskList.markTask(taskNumber - 1);
+            storage.saveTask(taskList.getTasks());
+            ui.showTaskMarked(taskList.getTask(taskNumber - 1));
         } catch (KirkSteinException e) {
             ui.showError(e.getMessage());
         } catch (Exception e) {
@@ -73,9 +72,9 @@ public class KirkStein {
     private static void handleUnmark(String userInput) {
         try {
             int taskNumber = Parser.parseTaskNumber(userInput, 7);
-            list.get(taskNumber - 1).markFalse();
-            storage.saveTask(list);
-            ui.showTaskUnmarked(list.get(taskNumber - 1));
+            taskList.unmarkTask(taskNumber - 1);
+            storage.saveTask(taskList.getTasks());
+            ui.showTaskUnmarked(taskList.getTask(taskNumber - 1));
         } catch (KirkSteinException e) {
             ui.showError(e.getMessage());
         } catch (Exception e) {
@@ -86,13 +85,13 @@ public class KirkStein {
     private static void handleDelete(String userInput) {
         try {
             int taskNumber = Parser.parseTaskNumber(userInput, 7);
-            if (taskNumber < 1 || taskNumber > list.size()) {
+            if (taskNumber < 1 || taskNumber > taskList.size()) {
                 ui.showError("Invalid Epstein file page!");
                 return;
             }
-            Task removedTask = list.remove(taskNumber - 1);
-            storage.saveTask(list);
-            ui.showTaskDeleted(removedTask, list.size());
+            Task removedTask = taskList.removeTask(taskNumber - 1);
+            storage.saveTask(taskList.getTasks());
+            ui.showTaskDeleted(removedTask, taskList.size());
         } catch (KirkSteinException e) {
             ui.showError(e.getMessage());
         } catch (Exception e) {
@@ -156,8 +155,8 @@ public class KirkStein {
     }
 
     private static void addTask(Task task) {
-        list.add(task);
-        storage.saveTask(list);
-        ui.showTaskAdded(task, list.size());
+        taskList.addTask(task);
+        storage.saveTask(taskList.getTasks());
+        ui.showTaskAdded(task, taskList.size());
     }
 }
