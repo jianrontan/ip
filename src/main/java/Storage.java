@@ -21,7 +21,6 @@ class Storage {
                 writer.write(task.toString() + "\n");
             }
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -68,7 +67,6 @@ class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
         return tasks;
     }
