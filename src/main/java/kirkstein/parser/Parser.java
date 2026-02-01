@@ -17,6 +17,10 @@ public class Parser {
     }
 
     public static String parseTodoDescription(String input) throws KirkSteinException {
+        if (input.length() <= 5) {
+            throw new KirkSteinException("Epstein todo description cannot be empty!");
+        }
+
         String description = input.substring(5).trim();
         if (description.isEmpty()) {
             throw new KirkSteinException("Epstein todo description cannot be empty!");
