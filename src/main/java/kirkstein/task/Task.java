@@ -1,8 +1,10 @@
+package kirkstein.task;
+
 public class Task {
     private final String description;
     private TaskStatus status;
 
-    Task(String description) {
+    public Task(String description) {
         this.description = description;
         this.status = TaskStatus.UNMARKED;
     }

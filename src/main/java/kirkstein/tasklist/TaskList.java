@@ -1,9 +1,13 @@
+package kirkstein.tasklist;
+
+import kirkstein.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
-    private static ArrayList<Task> list;
+    private ArrayList<Task> list;
 
-    TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         list = tasks;
     }
 

@@ -52,11 +52,11 @@ git checkout -b branch-A-MoreOOP
 
 # Make changes and commit frequently
 git add .
-git commit -m "Add Ui class for better separation of concerns"
+git commit -m "Add kirkstein.ui.Ui class for better separation of concerns"
 
 # More changes...
 git add .
-git commit -m "Add Parser class to handle input parsing"
+git commit -m "Add kirkstein.parser.Parser class to handle input parsing"
 
 # Test before merging
 cd text-ui-test && ./runtest.sh && cd ..

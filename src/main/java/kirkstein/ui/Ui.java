@@ -1,3 +1,7 @@
+package kirkstein.ui;
+
+import kirkstein.task.Task;
+
 import java.util.ArrayList;
 
 public class Ui {
