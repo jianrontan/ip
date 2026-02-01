@@ -2,7 +2,7 @@
 
 ## Compile
 ```bash
-javac -d bin src/main/java/*.java
+javac -d bin src/main/java/*.java src/main/java/kirkstein/*/*.java
 ```
 
 ## Run
