@@ -1,17 +1,23 @@
+package kirkstein.storage;
+
+import kirkstein.task.Task;
+import kirkstein.task.Todo;
+import kirkstein.task.Deadline;
+import kirkstein.task.Event;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-class Storage {
+public class Storage {
     private final String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
