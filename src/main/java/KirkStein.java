@@ -59,40 +59,42 @@ public class KirkStein {
 
     private static void handleMark(String userInput) {
         try {
-            int mark = Integer.parseInt(userInput.substring(5));
-            list.get(mark - 1).markTrue();
+            int taskNumber = Parser.parseTaskNumber(userInput, 5);
+            list.get(taskNumber - 1).markTrue();
             storage.saveTask(list);
-            ui.showTaskMarked(list.get(mark - 1));
-        }
-        // Add to list
-        catch (Exception e) {
+            ui.showTaskMarked(list.get(taskNumber - 1));
+        } catch (KirkSteinException e) {
+            ui.showError(e.getMessage());
+        } catch (Exception e) {
             ui.showError("Invalid mark command! Use: mark <task number>");
         }
     }
 
     private static void handleUnmark(String userInput) {
         try {
-            int unmark = Integer.parseInt(userInput.substring(7));
-            list.get(unmark - 1).markFalse();
+            int taskNumber = Parser.parseTaskNumber(userInput, 7);
+            list.get(taskNumber - 1).markFalse();
             storage.saveTask(list);
-            ui.showTaskUnmarked(list.get(unmark - 1));
-        }
-        // Add to list
-        catch (Exception e) {
+            ui.showTaskUnmarked(list.get(taskNumber - 1));
+        } catch (KirkSteinException e) {
+            ui.showError(e.getMessage());
+        } catch (Exception e) {
             ui.showError("Invalid unmark command! Use: unmark <task number>");
         }
     }
 
     private static void handleDelete(String userInput) {
         try {
-            int taskNum = Integer.parseInt(userInput.substring(7).trim());
-            if (taskNum < 1 || taskNum > list.size()) {
+            int taskNumber = Parser.parseTaskNumber(userInput, 7);
+            if (taskNumber < 1 || taskNumber > list.size()) {
                 ui.showError("Invalid Epstein file page!");
                 return;
             }
-            Task removedTask = list.remove(taskNum - 1);
+            Task removedTask = list.remove(taskNumber - 1);
             storage.saveTask(list);
             ui.showTaskDeleted(removedTask, list.size());
+        } catch (KirkSteinException e) {
+            ui.showError(e.getMessage());
         } catch (Exception e) {
             ui.showError("Invalid delete command! Use: delete <task number>");
         }
@@ -117,65 +119,39 @@ public class KirkStein {
     }
 
     private static void handleTodo(String userInput) {
-        String description = userInput.substring(5).trim();
-        if (description.isEmpty()) {
-            ui.showError("Epstein todo description cannot be empty!");
-            return;
-        }
-        Task task = new Todo(description);
-        addTask(task);
-    }
-
-    private static LocalDate parseDate(String date) throws DateTimeParseException {
         try {
-            return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        } catch (DateTimeParseException e1) {
-            try {
-                return LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            } catch (DateTimeParseException e2) {
-                throw new DateTimeParseException("Invalid date format", date, 0);
-            }
+            String description = Parser.parseTodoDescription(userInput);
+            Task task = new Todo(description);
+            addTask(task);
+        } catch (KirkSteinException e) {
+            ui.showError(e.getMessage());
         }
     }
 
     private static void handleDeadline(String userInput) {
         try {
-            String[] parts = userInput.substring(9).split(" /by ");
-            if (parts.length != 2) {
-                ui.showError("Invalid kirk deadline format! Use: deadline <task> /by <date>");
-                return;
-            }
-            LocalDate byDate = parseDate(parts[1].trim());
-            Task task = new Deadline(parts[0].trim(), byDate);
+            String[] parts = Parser.parseDeadline(userInput);
+            String description = parts[0];
+            LocalDate byDate = Parser.parseDate(parts[1]);
+
+            Task task = new Deadline(description, byDate);
             addTask(task);
-        } catch (DateTimeParseException e) {
-            ui.showError("Invalid date format! Use yyyy/mm/dd or dd/mm/yyyy");
-        } catch (Exception e) {
-            ui.showError("Invalid deadline format!");
+        } catch (KirkSteinException e) {
+            ui.showError(e.getMessage());
         }
     }
 
     private static void handleEvent(String userInput) {
         try {
-            String remaining = userInput.substring(6);
-            String[] parts1 = remaining.split(" /from ");
-            if (parts1.length != 2) {
-                ui.showError("Invalid diddy party format! Use: event <task> /from <start> /to <end>");
-                return;
-            }
-            String[] parts2 = parts1[1].split(" /to ");
-            if (parts2.length != 2) {
-                ui.showError("Invalid diddy party format! Use: event <task> /from <start> /to <end>");
-                return;
-            }
+            String[] parts = Parser.parseEvent(userInput);
+            String description = parts[0];
+            LocalDate fromDate = Parser.parseDate(parts[1]);
+            LocalDate toDate = Parser.parseDate(parts[2]);
 
-            LocalDate fromDate = parseDate(parts2[0].trim());
-            LocalDate toDate = parseDate(parts2[1].trim());
-
-            Task task = new Event(parts1[0].trim(), fromDate, toDate);
+            Task task = new Event(description, fromDate, toDate);
             addTask(task);
-        } catch (Exception e) {
-            ui.showError("Invalid diddy party format!");
+        } catch (KirkSteinException e) {
+            ui.showError(e.getMessage());
         }
     }
 

@@ -5,38 +5,32 @@ ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
   [T][ ] kill netanyahu
-Now you have 10 tasks in the list.
+Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
   [D][ ] takeover greenland (by: Aug 15 2026)
-Now you have 11 tasks in the list.
+Now you have 5 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
   [D][ ] takeover argentina (by: Nov 11 2026)
-Now you have 12 tasks in the list.
+Now you have 6 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
   [E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
-Now you have 13 tasks in the list.
+Now you have 7 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are your Epstein files:
 1.[T][X] kill netanyahu
 2.[D][X] takeover greenland (by: Aug 15 2026)
-3.[D][ ] takeover greenland (by: Aug 15 2026)
-4.[D][ ] takeover argentina (by: Nov 11 2026)
-5.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
-6.[T][ ] kill netanyahu
-7.[D][ ] takeover greenland (by: Aug 15 2026)
-8.[D][ ] takeover argentina (by: Nov 11 2026)
-9.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
-10.[T][ ] kill netanyahu
-11.[D][ ] takeover greenland (by: Aug 15 2026)
-12.[D][ ] takeover argentina (by: Nov 11 2026)
-13.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
+3.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
+4.[T][ ] kill netanyahu
+5.[D][ ] takeover greenland (by: Aug 15 2026)
+6.[D][ ] takeover argentina (by: Nov 11 2026)
+7.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this as redacted:
@@ -50,37 +44,25 @@ ____________________________________________________________
 Here are your Epstein files:
 1.[T][X] kill netanyahu
 2.[D][X] takeover greenland (by: Aug 15 2026)
-3.[D][ ] takeover greenland (by: Aug 15 2026)
-4.[D][ ] takeover argentina (by: Nov 11 2026)
-5.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
-6.[T][ ] kill netanyahu
-7.[D][ ] takeover greenland (by: Aug 15 2026)
-8.[D][ ] takeover argentina (by: Nov 11 2026)
-9.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
-10.[T][ ] kill netanyahu
-11.[D][ ] takeover greenland (by: Aug 15 2026)
-12.[D][ ] takeover argentina (by: Nov 11 2026)
-13.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
+3.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
+4.[T][ ] kill netanyahu
+5.[D][ ] takeover greenland (by: Aug 15 2026)
+6.[D][ ] takeover argentina (by: Nov 11 2026)
+7.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this file:
-  [D][ ] takeover greenland (by: Aug 15 2026)
-Now you have 12 files in the list.
+  [E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
+Now you have 6 files in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are your Epstein files:
 1.[T][X] kill netanyahu
 2.[D][X] takeover greenland (by: Aug 15 2026)
-3.[D][ ] takeover argentina (by: Nov 11 2026)
-4.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
-5.[T][ ] kill netanyahu
-6.[D][ ] takeover greenland (by: Aug 15 2026)
-7.[D][ ] takeover argentina (by: Nov 11 2026)
-8.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
-9.[T][ ] kill netanyahu
-10.[D][ ] takeover greenland (by: Aug 15 2026)
-11.[D][ ] takeover argentina (by: Nov 11 2026)
-12.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
+3.[T][ ] kill netanyahu
+4.[D][ ] takeover greenland (by: Aug 15 2026)
+5.[D][ ] takeover argentina (by: Nov 11 2026)
+6.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
 ____________________________________________________________
 ____________________________________________________________
 Bye! See you in the files.
