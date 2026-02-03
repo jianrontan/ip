@@ -40,6 +40,7 @@ public class Storage {
                 writer.write(task.toString() + "\n");
             }
         } catch (IOException e) {
+            // Fail silently if unable to save tasks
         }
     }
 
@@ -65,9 +66,9 @@ public class Storage {
                     tasks.add(todo);
 
                 } else if (taskType == 'D') {
-                    String[] parts = taskDescription.split(" \\(by: ");
-                    String description = parts[0];
-                    String dateStr = parts[1].replace(")", "");
+                    String[] deadlineParts = taskDescription.split(" \\(by: ");
+                    String description = deadlineParts[0];
+                    String dateStr = deadlineParts[1].replace(")", "");
 
                     LocalDate by = LocalDate.parse(dateStr, formatter);
 
@@ -76,21 +77,22 @@ public class Storage {
                     tasks.add(deadline);
 
                 } else if (taskType == 'E') {
-                    String[] parts = taskDescription.split(" \\(from: ");
-                    String description = parts[0].trim();
-                    String[] parts2 = parts[1].split(" to: ");
-                    String fromStr = parts2[0].trim();
-                    String toStr = parts2[1].replace(")", "").trim();
+                    String[] eventParts = taskDescription.split(" \\(from: ");
+                    String eventDescription = eventParts[0].trim();
+                    String[] eventDatesParts = eventParts[1].split(" to: ");
+                    String fromStr = eventDatesParts[0].trim();
+                    String toStr = eventDatesParts[1].replace(")", "").trim();
 
                     LocalDate from = LocalDate.parse(fromStr, formatter);
                     LocalDate to = LocalDate.parse(toStr, formatter);
 
-                    Event event = new Event(description, from, to);
+                    Event event = new Event(eventDescription, from, to);
                     if (marked) event.markTrue();
                     tasks.add(event);
                 }
             }
         } catch (FileNotFoundException e) {
+            // File doesn't exist on first run - return empty list
         }
         return tasks;
     }
