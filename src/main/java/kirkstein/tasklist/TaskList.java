@@ -38,4 +38,20 @@ public class TaskList {
     public void addTask(Task task) {
         list.add(task);
     }
+
+    /**
+     * Finds tasks whose descriptions contain the search keyword.
+     *
+     * @param searchTerm The keyword to search for.
+     * @return ArrayList of tasks that match the keyword.
+     */
+    public ArrayList<Task> findTask(String searchTerm) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task : list) {
+            if (task.getDescription().toLowerCase().contains(searchTerm.toLowerCase())) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
 }

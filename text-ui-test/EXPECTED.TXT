@@ -4,56 +4,188 @@ Welcome to my island!
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [T][ ] kill netanyahu
+  [T][ ] read book
 Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [D][ ] takeover greenland (by: Aug 15 2026)
+  [T][ ] buy groceries
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [D][ ] takeover argentina (by: Nov 11 2026)
+  [T][ ] write essay
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
+  [T][ ] read magazine
 Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
+Got it. I've added this task:
+  [D][ ] submit assignment (by: Dec 31 2025)
+Now you have 5 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [D][ ] return book (by: Dec 31 2025)
+Now you have 6 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [D][ ] project report (by: Jan 15 2026)
+Now you have 7 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [E][ ] team meeting (from: Dec 01 2025 to: Dec 02 2025)
+Now you have 8 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [E][ ] book club (from: Dec 01 2025 to: Dec 02 2025)
+Now you have 9 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [E][ ] study session (from: Feb 10 2026 to: Feb 11 2026)
+Now you have 10 tasks in the list.
+____________________________________________________________
+____________________________________________________________
 Here are your Epstein files:
-1.[T][ ] kill netanyahu
-2.[D][ ] takeover greenland (by: Aug 15 2026)
-3.[D][ ] takeover argentina (by: Nov 11 2026)
-4.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
+1.[T][ ] read book
+2.[T][ ] buy groceries
+3.[T][ ] write essay
+4.[T][ ] read magazine
+5.[D][ ] submit assignment (by: Dec 31 2025)
+6.[D][ ] return book (by: Dec 31 2025)
+7.[D][ ] project report (by: Jan 15 2026)
+8.[E][ ] team meeting (from: Dec 01 2025 to: Dec 02 2025)
+9.[E][ ] book club (from: Dec 01 2025 to: Dec 02 2025)
+10.[E][ ] study session (from: Feb 10 2026 to: Feb 11 2026)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this as redacted:
-[T][X] kill netanyahu
+[T][X] read book
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this as redacted:
-[D][X] takeover greenland (by: Aug 15 2026)
+[T][X] write essay
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked this as redacted:
+[D][X] submit assignment (by: Dec 31 2025)
 ____________________________________________________________
 ____________________________________________________________
 Here are your Epstein files:
-1.[T][X] kill netanyahu
-2.[D][X] takeover greenland (by: Aug 15 2026)
-3.[D][ ] takeover argentina (by: Nov 11 2026)
-4.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
+1.[T][X] read book
+2.[T][ ] buy groceries
+3.[T][X] write essay
+4.[T][ ] read magazine
+5.[D][X] submit assignment (by: Dec 31 2025)
+6.[D][ ] return book (by: Dec 31 2025)
+7.[D][ ] project report (by: Jan 15 2026)
+8.[E][ ] team meeting (from: Dec 01 2025 to: Dec 02 2025)
+9.[E][ ] book club (from: Dec 01 2025 to: Dec 02 2025)
+10.[E][ ] study session (from: Feb 10 2026 to: Feb 11 2026)
+____________________________________________________________
+____________________________________________________________
+OK! I've unredacted this:
+[T][ ] read book
+____________________________________________________________
+____________________________________________________________
+Here are your Epstein files:
+1.[T][ ] read book
+2.[T][ ] buy groceries
+3.[T][X] write essay
+4.[T][ ] read magazine
+5.[D][X] submit assignment (by: Dec 31 2025)
+6.[D][ ] return book (by: Dec 31 2025)
+7.[D][ ] project report (by: Jan 15 2026)
+8.[E][ ] team meeting (from: Dec 01 2025 to: Dec 02 2025)
+9.[E][ ] book club (from: Dec 01 2025 to: Dec 02 2025)
+10.[E][ ] study session (from: Feb 10 2026 to: Feb 11 2026)
+____________________________________________________________
+____________________________________________________________
+Here are your searched Epstein files:
+1.[T][ ] read book
+2.[D][ ] return book (by: Dec 31 2025)
+3.[E][ ] book club (from: Dec 01 2025 to: Dec 02 2025)
+____________________________________________________________
+____________________________________________________________
+Here are your searched Epstein files:
+1.[T][X] write essay
+____________________________________________________________
+____________________________________________________________
+Here are your searched Epstein files:
+1.[E][ ] team meeting (from: Dec 01 2025 to: Dec 02 2025)
+____________________________________________________________
+____________________________________________________________
+No matching tasks found in your Epstein files.
+____________________________________________________________
+____________________________________________________________
+Here are your searched Epstein files:
+1.[D][ ] project report (by: Jan 15 2026)
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this file:
-  [D][ ] takeover argentina (by: Nov 11 2026)
-Now you have 3 files in the list.
+  [T][ ] buy groceries
+Now you have 9 files in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are your Epstein files:
-1.[T][X] kill netanyahu
-2.[D][X] takeover greenland (by: Aug 15 2026)
-3.[E][ ] bomb iran (from: Mar 01 2003 to: Jul 15 2011)
+1.[T][ ] read book
+2.[T][X] write essay
+3.[T][ ] read magazine
+4.[D][X] submit assignment (by: Dec 31 2025)
+5.[D][ ] return book (by: Dec 31 2025)
+6.[D][ ] project report (by: Jan 15 2026)
+7.[E][ ] team meeting (from: Dec 01 2025 to: Dec 02 2025)
+8.[E][ ] book club (from: Dec 01 2025 to: Dec 02 2025)
+9.[E][ ] study session (from: Feb 10 2026 to: Feb 11 2026)
+____________________________________________________________
+____________________________________________________________
+Here are your searched Epstein files:
+1.[T][ ] read book
+2.[D][ ] return book (by: Dec 31 2025)
+3.[E][ ] book club (from: Dec 01 2025 to: Dec 02 2025)
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Invalid Epstein file page!
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Invalid mark command! Use: mark <task number>
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Invalid unmark command! Use: unmark <task number>
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Epstein todo description cannot be empty!
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Invalid kirk deadline format! Use: deadline <task> /by <date>
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Invalid diddy party format! Use: event <task> /from <start> /to <end>
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Epstein todo description cannot be empty!
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Invalid kirk deadline format! Use: deadline <task> /by <date>
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Invalid diddy party format! Use: event <task> /from <start> /to <end>
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Invalid kirk deadline format! Use: deadline <task> /by <date>
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Invalid diddy party format! Use: event <task> /from <start> /to <end>
+____________________________________________________________
+____________________________________________________________
+OOPS!!! Invalid date format! Use yyyy/mm/dd or dd/mm/yyyy
 ____________________________________________________________
 ____________________________________________________________
 Bye! See you in the files.

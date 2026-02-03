@@ -7,6 +7,7 @@ import kirkstein.storage.Storage;
 import kirkstein.ui.Ui;
 import kirkstein.parser.Parser;
 import kirkstein.tasklist.TaskList;
+import java.util.ArrayList;
 
 import java.util.Scanner;
 import java.io.File;
@@ -56,6 +57,10 @@ public class KirkStein {
             else if (userInput.startsWith("delete")) {
                 handleDelete(userInput);
             }
+            // find item
+            else if (userInput.startsWith("find")) {
+                handleFind(userInput);
+            }
             // Add to list
             else {
                 handleAdd(userInput);
@@ -104,6 +109,16 @@ public class KirkStein {
             ui.showError(e.getMessage());
         } catch (Exception e) {
             ui.showError("Invalid delete command! Use: delete <task number>");
+        }
+    }
+
+    private static void handleFind(String userInput) {
+        try {
+            String keyword = Parser.parseFindTerm(userInput);
+            ArrayList<Task> matchingTasks = taskList.findTask(keyword);
+            ui.showFindResults(matchingTasks);
+        } catch (KirkSteinException e) {
+            ui.showError(e.getMessage());
         }
     }
 

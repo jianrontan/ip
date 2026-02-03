@@ -9,9 +9,13 @@ public class Task {
         this.status = TaskStatus.UNMARKED;
     }
 
-    private Task(String description, boolean marked) {
-        this.description = description;
-        this.status = TaskStatus.MARKED;
+    /**
+     * Returns description of the task
+     *
+     * @return Returns description of task
+     */
+    public String getDescription() {
+        return description;
     }
 
     public void markTrue() {
