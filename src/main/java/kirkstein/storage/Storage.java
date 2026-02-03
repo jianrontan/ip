@@ -14,13 +14,26 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Handles storage of tasks
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Creates a Storage object with the provided text file path
+     *
+     * @param filePath The path to the text file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Save all tasks into text file
+     *
+     * @param tasks The array list of tasks
+     */
     public void saveTask(ArrayList<Task> tasks) {
         try (FileWriter writer = new FileWriter(filePath)) {
             for (Task task : tasks) {
@@ -30,6 +43,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Load tasks from text file
+     *
+     * @return Returns array list of tasks
+     */
     public ArrayList<Task> loadTask() {
         ArrayList<Task> tasks = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");

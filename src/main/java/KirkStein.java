@@ -13,11 +13,22 @@ import java.util.Scanner;
 import java.io.File;
 import java.time.LocalDate;
 
+/**
+ * Main class for the KirkStein chatbot application
+ * KirkStein is a task management chatbot that helps users manage
+ * todos, deadlines, and events through a command-line interface
+ */
 public class KirkStein {
     private static Storage storage;
     private static Ui ui;
     private static TaskList taskList;
 
+    /**
+     * Entry point for the KirkStein application
+     * Initializes the chatbot and starts the main command loop
+     *
+     * @param args Command-line arguments (not used)
+     */
     public static void main(String[] args) {
         ui = new Ui();
 
