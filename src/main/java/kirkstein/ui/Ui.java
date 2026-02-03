@@ -64,4 +64,22 @@ public class Ui {
         System.out.println("OOPS!!! " + message);
         System.out.println(LINE);
     }
+
+    /**
+     * Displays the tasks whose description matches the search term
+     *
+     * @param tasks Array list of tasks that matches the search term
+     */
+    public void showFindResults(ArrayList<Task> tasks) {
+        System.out.println(LINE);
+        if (tasks.isEmpty()) {
+            System.out.println("No matching tasks found in your Epstein files.");
+        } else {
+            System.out.println("Here are your searched Epstein files:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println((i + 1) + "." + tasks.get(i).toString());
+            }
+        }
+        System.out.println(LINE);
+    }
 }

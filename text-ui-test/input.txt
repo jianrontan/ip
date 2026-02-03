@@ -1,11 +1,38 @@
-todo kill netanyahu
-deadline takeover greenland /by 15/08/2026
-deadline takeover argentina /by 2026/11/11
-event bomb iran /from 01/03/2003 /to 15/07/2011
+todo read book
+todo buy groceries
+todo write essay
+todo read magazine
+deadline submit assignment /by 2025/12/31
+deadline return book /by 31/12/2025
+deadline project report /by 2026/01/15
+event team meeting /from 2025/12/01 /to 2025/12/02
+event book club /from 01/12/2025 /to 02/12/2025
+event study session /from 2026/02/10 /to 2026/02/11
 list
 mark 1
-mark 2
+mark 3
+mark 5
 list
-delete 3
+unmark 1
 list
+find book
+find essay
+find meeting
+find homework
+find project
+delete 2
+list
+find book
+delete 10
+mark 20
+unmark 15
+todo
+deadline
+event
+todo
+deadline homework
+event party
+deadline homework /by
+event party /from 2025/12/01
+deadline homework /by 2025-12-31
 bye

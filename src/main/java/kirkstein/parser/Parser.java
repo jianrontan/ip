@@ -62,4 +62,23 @@ public class Parser {
             }
         }
     }
+
+    /**
+     * Parses the search term when user uses find command
+     *
+     * @param input The user's input
+     * @return Returns the user's search term
+     * @throws KirkSteinException Throws exception when search is invalid (empty)
+     */
+    public static String parseFindTerm(String input) throws KirkSteinException {
+        if (input.length() <= 5) {
+            throw new KirkSteinException("Search term cannot be empty!");
+        }
+
+        String keyword = input.substring(5).trim();
+        if (keyword.isEmpty()) {
+            throw new KirkSteinException("Search term cannot be empty!");
+        }
+        return keyword;
+    }
 }
