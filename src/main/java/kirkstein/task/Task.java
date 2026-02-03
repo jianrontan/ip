@@ -9,11 +9,6 @@ public class Task {
         this.status = TaskStatus.UNMARKED;
     }
 
-    private Task(String description, boolean marked) {
-        this.description = description;
-        this.status = TaskStatus.MARKED;
-    }
-
     public void markTrue() {
         this.status = TaskStatus.MARKED;
     }

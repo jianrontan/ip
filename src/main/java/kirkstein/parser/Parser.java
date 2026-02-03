@@ -38,17 +38,17 @@ public class Parser {
 
     public static String[] parseEvent(String input) throws KirkSteinException {
         String remaining = input.substring(6);
-        String[] parts1 = remaining.split(" /from ");
-        if (parts1.length != 2) {
+        String[] descriptionAndTime = remaining.split(" /from ");
+        if (descriptionAndTime.length != 2) {
             throw new KirkSteinException("Invalid diddy party format! Use: event <task> /from <start> /to <end>");
         }
 
-        String[] parts2 = parts1[1].split(" /to ");
-        if (parts2.length != 2) {
+        String[] timeRange = descriptionAndTime[1].split(" /to ");
+        if (timeRange.length != 2) {
             throw new KirkSteinException("Invalid diddy party format! Use: event <task> /from <start> /to <end>");
         }
 
-        return new String[]{parts1[0].trim(), parts2[0].trim(), parts2[1].trim()};
+        return new String[]{descriptionAndTime[0].trim(), timeRange[0].trim(), timeRange[1].trim()};
     }
 
     public static LocalDate parseDate(String dateString) throws KirkSteinException {
