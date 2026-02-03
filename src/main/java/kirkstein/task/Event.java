@@ -3,6 +3,9 @@ package kirkstein.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task that is an event with a date range
+ */
 public class Event extends Task {
 
     protected LocalDate from;

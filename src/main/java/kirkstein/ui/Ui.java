@@ -4,9 +4,15 @@ import kirkstein.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Handles all user interface interactions
+ */
 public class Ui {
     private static final String LINE = "____________________________________________________________";
 
+    /**
+     * Displays the welcome message
+     */
     public void showWelcome() {
         System.out.println(LINE);
         System.out.println("Hello! I'm KirkStein");
@@ -14,12 +20,20 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Displays the goodbye message
+     */
     public void showGoodbye() {
         System.out.println(LINE);
         System.out.println("Bye! See you in the files.");
         System.out.println(LINE);
     }
 
+    /**
+     * Displays the list of tasks
+     *
+     * @param tasks The list of tasks to display
+     */
     public void showTaskList(ArrayList<Task> tasks) {
         System.out.println(LINE);
         System.out.println("Here are your Epstein files:");
@@ -29,6 +43,12 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Displays a message confirming a task was added
+     *
+     * @param task The task that was added
+     * @param totalTasks The total number of tasks
+     */
     public void showTaskAdded(Task task, int totalTasks) {
         System.out.println(LINE);
         System.out.println("Got it. I've added this task:");
@@ -37,6 +57,12 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Displays a message confirming a task was deleted
+     *
+     * @param task The task to delete
+     * @param remainingTasks The total number of tasks remaining
+     */
     public void showTaskDeleted(Task task, int remainingTasks) {
         System.out.println(LINE);
         System.out.println("Noted. I've removed this file:");
@@ -45,6 +71,11 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Displays a message confirming a task was marked
+     *
+     * @param task The task to mark
+     */
     public void showTaskMarked(Task task) {
         System.out.println(LINE);
         System.out.println("Nice! I've marked this as redacted:");
@@ -52,6 +83,11 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Displays a message confirming a task was unmarked
+     *
+     * @param task The task to unmark
+     */
     public void showTaskUnmarked(Task task) {
         System.out.println(LINE);
         System.out.println("OK! I've unredacted this:");
@@ -59,6 +95,11 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Displays an error message
+     *
+     * @param message The error message to display
+     */
     public void showError(String message) {
         System.out.println(LINE);
         System.out.println("OOPS!!! " + message);
