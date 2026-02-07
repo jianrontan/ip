@@ -1,8 +1,9 @@
 package kirkstein.tasklist;
 
+import java.util.ArrayList;
+
 import kirkstein.task.Task;
 
-import java.util.ArrayList;
 
 /**
  * Manages a collection of tasks

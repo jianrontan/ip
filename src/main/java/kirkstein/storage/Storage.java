@@ -1,18 +1,18 @@
 package kirkstein.storage;
 
-import kirkstein.task.Task;
-import kirkstein.task.Todo;
-import kirkstein.task.Deadline;
-import kirkstein.task.Event;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import kirkstein.task.Deadline;
+import kirkstein.task.Event;
+import kirkstein.task.Task;
+import kirkstein.task.Todo;
 
 /**
  * Handles storage of tasks
@@ -62,7 +62,9 @@ public class Storage {
 
                 if (taskType == 'T') {
                     Todo todo = new Todo(taskDescription);
-                    if (marked) todo.markTrue();
+                    if (marked) {
+                        todo.markTrue();
+                    }
                     tasks.add(todo);
 
                 } else if (taskType == 'D') {
@@ -73,7 +75,9 @@ public class Storage {
                     LocalDate by = LocalDate.parse(dateStr, formatter);
 
                     Deadline deadline = new Deadline(description, by);
-                    if (marked) deadline.markTrue();
+                    if (marked) {
+                        deadline.markTrue();
+                    }
                     tasks.add(deadline);
 
                 } else if (taskType == 'E') {
@@ -87,7 +91,9 @@ public class Storage {
                     LocalDate to = LocalDate.parse(toStr, formatter);
 
                     Event event = new Event(eventDescription, from, to);
-                    if (marked) event.markTrue();
+                    if (marked) {
+                        event.markTrue();
+                    }
                     tasks.add(event);
                 }
             }

@@ -1,17 +1,17 @@
-import kirkstein.task.Task;
-import kirkstein.task.Todo;
-import kirkstein.task.Deadline;
-import kirkstein.task.Event;
-import kirkstein.exception.KirkSteinException;
-import kirkstein.storage.Storage;
-import kirkstein.ui.Ui;
-import kirkstein.parser.Parser;
-import kirkstein.tasklist.TaskList;
-import java.util.ArrayList;
-
-import java.util.Scanner;
 import java.io.File;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import kirkstein.exception.KirkSteinException;
+import kirkstein.parser.Parser;
+import kirkstein.storage.Storage;
+import kirkstein.task.Deadline;
+import kirkstein.task.Event;
+import kirkstein.task.Task;
+import kirkstein.task.Todo;
+import kirkstein.tasklist.TaskList;
+import kirkstein.ui.Ui;
 
 /**
  * Main class for the KirkStein chatbot application
@@ -51,29 +51,17 @@ public class KirkStein {
             // End loop
             if (userInput.equals("bye")) {
                 ui.showGoodbye();
-            }
-            // Display list
-            else if (userInput.equals("list")) {
+            } else if (userInput.equals("list")) { // Display list
                 ui.showTaskList(taskList.getTasks());
-            }
-            // Mark item
-            else if (userInput.startsWith("mark")) {
+            } else if (userInput.startsWith("mark")) { // Mark item
                 handleMark(userInput);
-            }
-            // Unmark item
-            else if (userInput.startsWith("unmark")) {
+            } else if (userInput.startsWith("unmark")) { // Unmark item
                 handleUnmark(userInput);
-            }
-            // Delete item
-            else if (userInput.startsWith("delete")) {
+            } else if (userInput.startsWith("delete")) { // Delete item
                 handleDelete(userInput);
-            }
-            // find item
-            else if (userInput.startsWith("find")) {
+            } else if (userInput.startsWith("find")) { // Find item
                 handleFind(userInput);
-            }
-            // Add to list
-            else {
+            } else { // Add to list
                 handleAdd(userInput);
             }
         }
@@ -147,7 +135,8 @@ public class KirkStein {
         } else if (userInput.startsWith("event")) {
             ui.showError("Invalid diddy party format! Use: event <task> /from <start> /to <end>");
         } else {
-            ui.showError("That can't be part of the Epstein files diddy blud! It has to start with todo, deadline, or event");
+            ui.showError("That can't be part of the Epstein files diddy blud!"
+                    + "It has to start with todo, deadline, or event");
         }
     }
 

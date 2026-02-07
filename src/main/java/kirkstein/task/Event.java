@@ -11,6 +11,13 @@ public class Event extends Task {
     protected LocalDate from;
     protected LocalDate to;
 
+    /**
+     * Constructor to create Event object
+     *
+     * @param description Description of event
+     * @param from LocalDate of when event starts
+     * @param to LocalDate of when event ends
+     */
     public Event(String description, LocalDate from, LocalDate to) {
         super(description);
         this.from = from;
@@ -20,8 +27,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return "[E]" + super.toString() +
-                " (from: " + from.format(formatter) +
-                " to: " + to.format(formatter) + ")";
+        return "[E]" + super.toString()
+                + " (from: " + from.format(formatter)
+                + " to: " + to.format(formatter) + ")";
     }
 }

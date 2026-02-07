@@ -40,6 +40,7 @@ public class Task {
         this.status = TaskStatus.UNMARKED;
     }
 
+    @Override
     public String toString() {
         if (this.status == TaskStatus.MARKED) {
             return "[X] " + this.description;

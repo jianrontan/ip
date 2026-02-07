@@ -1,8 +1,8 @@
 package kirkstein.ui;
 
-import kirkstein.task.Task;
-
 import java.util.ArrayList;
+
+import kirkstein.task.Task;
 
 /**
  * Handles all user interface interactions
