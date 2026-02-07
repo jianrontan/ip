@@ -108,24 +108,24 @@ cd text-ui-test && ./runtest.sh && cd ..
 ```bash
 # Create branch
 git checkout master
-git checkout -b branch-Level-9
+git checkout -b branch-feature
 
 # Make changes and commit
 git add .
-git commit -m "Implement find command to search tasks by keyword"
+git commit -m "Implement feature"
 
 # Test everything
 ./gradlew test
 cd text-ui-test && ./runtest.sh && cd ..
 
 # If tests pass, push and merge
-git push origin branch-Level-9
+git push origin branch-feature
 git checkout master
-git merge --no-ff branch-Level-9
-git tag Level-9
+git merge --no-ff branch-feature
+git tag feature
 git push origin master
-git push origin branch-Level-9
-git push origin Level-9
+git push origin branch-feature
+git push origin feature
 ```
 
 ### Parallel Branches Workflow
