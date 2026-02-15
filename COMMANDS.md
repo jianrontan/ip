@@ -7,14 +7,16 @@
 ./gradlew build
 ```
 
-### Run Application
+### Run Application (GUI)
 ```bash
-# Clean output (no progress bar)
-./gradlew run --console=plain
+# Run with Gradle
+./gradlew run
 
-# OR build and run JAR directly (cleanest)
+# OR build and run JAR directly
 ./gradlew shadowJar && java -jar build/libs/kirkstein.jar
 ```
+
+**Note:** The application now runs as a **JavaFX GUI** - a chat window will open instead of console output.
 
 ### Run Tests
 ```bash
@@ -31,7 +33,7 @@ open build/reports/tests/test/index.html   # Mac/Linux
 ./gradlew shadowJar
 # Output: build/libs/kirkstein.jar
 
-# Run the JAR
+# Run the JAR (opens GUI window)
 java -jar build/libs/kirkstein.jar
 ```
 
@@ -42,23 +44,9 @@ java -jar build/libs/kirkstein.jar
 
 ---
 
-## Legacy Manual Compilation (Pre-Gradle)
-
-### Compile
-```bash
-javac -d bin src/main/java/*.java src/main/java/kirkstein/*/*.java
-```
-
-### Run
-```bash
-java -cp bin KirkStein
-```
-
----
-
 ## Testing
 
-### JUnit Tests (Unit Tests)
+### JUnit Tests (Backend Unit Tests)
 ```bash
 # Run all tests
 ./gradlew test
@@ -70,35 +58,12 @@ java -cp bin KirkStein
 ./gradlew clean test
 ```
 
-### Integration Tests (text-ui-test)
-**The script automatically cleans data files!**
-```bash
-cd text-ui-test
-./runtest.sh  # or runtest.bat on Windows
-cd ..
-```
-
-### Update Expected Output (When Behavior Intentionally Changes)
-```bash
-# 1. Clean data files
-rm -f data/tasks.txt text-ui-test/data/tasks.txt
-
-# 2. Generate new EXPECTED.TXT
-./gradlew shadowJar
-java -jar build/libs/kirkstein.jar < text-ui-test/input.txt > text-ui-test/EXPECTED.TXT
-
-# 3. Verify it looks correct
-cat text-ui-test/EXPECTED.TXT
-
-# 4. Run test to confirm
-cd text-ui-test && ./runtest.sh && cd ..
-```
-
-### Full Test Suite
-```bash
-# Run both JUnit and integration tests
-./gradlew test && cd text-ui-test && ./runtest.sh && cd ..
-```
+**Test Files:**
+- `src/test/java/TodoTest.java` - Tests for Todo tasks
+- `src/test/java/DeadlineTest.java` - Tests for Deadline tasks
+- `src/test/java/EventTest.java` - Tests for Event tasks
+- `src/test/java/TaskListTest.java` - Tests for TaskList operations
+- `src/test/java/ParserTest.java` - Tests for input parsing
 
 ---
 
@@ -114,9 +79,8 @@ git checkout -b branch-feature
 git add .
 git commit -m "Implement feature"
 
-# Test everything
+# Test
 ./gradlew test
-cd text-ui-test && ./runtest.sh && cd ..
 
 # If tests pass, push and merge
 git push origin branch-feature
@@ -141,7 +105,7 @@ git checkout branch-Level-9
 # ... make changes ...
 git add .
 git commit -m "Implement find command"
-./gradlew test && cd text-ui-test && ./runtest.sh && cd ..
+./gradlew test
 git push origin branch-Level-9
 git checkout master
 git merge --no-ff branch-Level-9
@@ -191,101 +155,194 @@ git commit -m "Your message"
 ./gradlew clean
 
 # Clean data files
-rm -rf data text-ui-test/data
+rm -rf data
 
 # Full clean
-./gradlew clean && rm -rf data text-ui-test/data
+./gradlew clean && rm -rf data
 ```
 
-### Quick Manual Test
+### Quick Manual Test (GUI)
 ```bash
-# Clean data and run
+# Clean data and run GUI
 rm -f data/tasks.txt
-java -jar build/libs/kirkstein.jar
+./gradlew run
 ```
 
 ### Full Build and Test Pipeline
 ```bash
-# Everything in one command
-./gradlew clean build test && cd text-ui-test && ./runtest.sh && cd ..
+# Build, test, and create JAR
+./gradlew clean build test shadowJar
 ```
 
 ---
 
-## Example Test Session
+## Testing the GUI Application
 
-### Testing Find Command
+### Manual Testing Workflow
+
+1. **Clean start:**
 ```bash
-# Build and run
-./gradlew shadowJar
-java -jar build/libs/kirkstein.jar
-
-# Commands to test:
-> todo read book
-> todo write essay  
-> deadline return book /by 2025/12/31
-> event book club /from 2025/12/01 /to 2025/12/02
-> list
-> find book          # Should show: todo, deadline, event
-> find essay         # Should show: todo only
-> find club          # Should show: event only
-> find homework      # Should show: No matching tasks
-> find               # Should show: Error message
-> bye
+rm -f data/tasks.txt
+./gradlew run
 ```
 
-### Testing All Features
-```bash
-# Build JAR
-./gradlew shadowJar
-
-# Run comprehensive test
-java -jar build/libs/kirkstein.jar
-
-# Test sequence:
-> todo read book
-> deadline homework /by 2025/12/31
-> event meeting /from 2025/12/01 /to 2025/12/02
-> list
-> mark 1
-> unmark 1
-> find book
-> delete 1
-> list
-> bye
+2. **Test basic commands in the GUI chat window:**
 ```
+todo read book
+todo write essay
+deadline return book /by 2025/12/31
+event book club /from 2025/12/01 /to 2025/12/02
+list
+```
+
+3. **Test mark/unmark:**
+```
+mark 1
+mark 3
+list
+unmark 1
+list
+```
+
+4. **Test find:**
+```
+find book          # Should show: todo, deadline, event
+find essay         # Should show: todo only
+find club          # Should show: event only
+find homework      # Should show: No matching tasks
+```
+
+5. **Test delete:**
+```
+delete 2
+list
+```
+
+6. **Test error handling:**
+```
+mark 100           # Invalid task number
+todo               # Empty description
+deadline           # Invalid format
+event              # Invalid format
+```
+
+7. **Test bye command:**
+```
+bye                # Should close the window
+```
+
+### Testing All Features Checklist
+
+- [ ] `todo <description>` - Adds todo task
+- [ ] `deadline <desc> /by <date>` - Adds deadline (yyyy/MM/dd or dd/MM/yyyy)
+- [ ] `event <desc> /from <date> /to <date>` - Adds event
+- [ ] `list` - Shows all tasks
+- [ ] `mark <number>` - Marks task as done
+- [ ] `unmark <number>` - Unmarks task
+- [ ] `find <keyword>` - Finds matching tasks
+- [ ] `delete <number>` - Deletes task
+- [ ] `bye` - Closes application
+- [ ] Tasks persist after restart
+- [ ] Error messages display correctly
+- [ ] Chat scrolls properly
+- [ ] User and bot avatars display
 
 ---
 
 ## Troubleshooting
 
-### Gradle Progress Bar Interfering with Output
-```bash
-# Use --console=plain
-./gradlew run --console=plain
+### JavaFX Warning on Startup
+```
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module'
+```
+**Solution:** This is expected and can be ignored. It doesn't affect functionality.
 
-# OR run JAR directly (better)
-./gradlew shadowJar && java -jar build/libs/kirkstein.jar
+### FXML Not Found Error
+```
+IllegalStateException: Location is not set
+```
+**Solution:** Ensure FXML files are in `src/main/resources/view/`
+```bash
+ls src/main/resources/view/
+# Should show: DialogBox.fxml, MainWindow.fxml
+```
+
+### Images Not Loading
+**Solution:** Ensure images are in `src/main/resources/images/`
+```bash
+ls src/main/resources/images/
+# Should show: Kirk.png, Netanyahu.png
 ```
 
 ### Tests Failing Due to Stale Data
 ```bash
 # Clean data files before testing
-rm -f data/tasks.txt text-ui-test/data/tasks.txt
-cd text-ui-test && ./runtest.sh && cd ..
+rm -f data/tasks.txt
+./gradlew clean test
 ```
 
 ### JAR Not Found
 ```bash
 # Rebuild JAR
 ./gradlew clean shadowJar
-ls -la build/libs/  # Verify it exists
+ls -la build/libs/  # Verify kirkstein.jar exists
 ```
 
 ### Compilation Errors
 ```bash
 # Clean build from scratch
 ./gradlew clean build --info
+```
+
+### GUI Not Appearing
+```bash
+# Check Java version (needs JDK 11+)
+java -version
+
+# Try running JAR directly
+./gradlew shadowJar
+java -jar build/libs/kirkstein.jar
+```
+
+---
+
+## Project Structure
+
+```
+ip/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   ├── DialogBox.java
+│   │   │   ├── KirkStein.java
+│   │   │   ├── Launcher.java
+│   │   │   ├── Main.java
+│   │   │   ├── MainWindow.java
+│   │   │   └── kirkstein/
+│   │   │       ├── exception/
+│   │   │       ├── parser/
+│   │   │       ├── storage/
+│   │   │       ├── task/
+│   │   │       ├── tasklist/
+│   │   │       └── ui/
+│   │   └── resources/
+│   │       ├── images/
+│   │       │   ├── Kirk.png
+│   │       │   └── Netanyahu.png
+│   │       └── view/
+│   │           ├── DialogBox.fxml
+│   │           └── MainWindow.fxml
+│   └── test/
+│       └── java/
+│           ├── DeadlineTest.java
+│           ├── EventTest.java
+│           ├── ParserTest.java
+│           ├── TaskListTest.java
+│           └── TodoTest.java
+├── data/
+│   └── tasks.txt (generated at runtime)
+├── build.gradle
+└── COMMANDS.md
 ```
 
 ---
@@ -295,11 +352,37 @@ ls -la build/libs/  # Verify it exists
 | Task | Command |
 |------|---------|
 | Build project | `./gradlew build` |
-| Run with Gradle | `./gradlew run --console=plain` |
+| Run GUI | `./gradlew run` |
 | Run JAR | `java -jar build/libs/kirkstein.jar` |
-| Run JUnit tests | `./gradlew test` |
-| Run integration tests | `cd text-ui-test && ./runtest.sh && cd ..` |
-| Full test suite | `./gradlew test && cd text-ui-test && ./runtest.sh && cd ..` |
+| Run tests | `./gradlew test` |
+| View test report | `start build/reports/tests/test/index.html` |
 | Build JAR | `./gradlew shadowJar` |
 | Clean build | `./gradlew clean build` |
-| View test report | `start build/reports/tests/test/index.html` |
+| Full pipeline | `./gradlew clean build test shadowJar` |
+| Clean data | `rm -f data/tasks.txt` |
+| Checkstyle | View → Tool Windows → CheckStyle |
+
+---
+
+## Development Notes
+
+### Application Type
+- **GUI Application** using JavaFX 17.0.7
+- Entry point: `Launcher.java` → `Main.java`
+- Main window: `MainWindow.fxml` controlled by `MainWindow.java`
+- Chat bubbles: `DialogBox.fxml` controlled by `DialogBox.java`
+
+### Testing Strategy
+- **Unit tests** for backend logic (Parser, TaskList, Task classes)
+- **Manual testing** for GUI functionality
+- No automated UI tests (JavaFX testing is complex)
+
+### Build System
+- **Gradle** for dependency management and builds
+- **shadowJar** plugin creates fat JAR with all dependencies
+- **Checkstyle** for code quality (config in `config/checkstyle/`)
+
+### Data Persistence
+- Tasks saved to `data/tasks.txt` automatically
+- File created on first run
+- Loaded on application startup

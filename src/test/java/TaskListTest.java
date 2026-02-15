@@ -1,12 +1,14 @@
-import kirkstein.tasklist.TaskList;
-import kirkstein.task.Task;
-import kirkstein.task.Todo;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import kirkstein.task.Task;
+import kirkstein.task.Todo;
+import kirkstein.tasklist.TaskList;
 
 public class TaskListTest {
     private TaskList taskList;
@@ -64,5 +66,28 @@ public class TaskListTest {
         taskList.unmarkTask(0);
 
         assertTrue(taskList.getTask(0).toString().contains("[ ]"));
+    }
+
+    @Test
+    public void findTask_multipleMatches_success() {
+        taskList.addTask(new Todo("read book"));
+        taskList.addTask(new Todo("buy groceries"));
+        taskList.addTask(new Todo("return book"));
+
+        ArrayList<Task> results = taskList.findTask("book");
+
+        assertEquals(2, results.size());
+        assertTrue(results.get(0).getDescription().contains("book"));
+        assertTrue(results.get(1).getDescription().contains("book"));
+    }
+
+    @Test
+    public void findTask_noMatches_emptyList() {
+        taskList.addTask(new Todo("read book"));
+        taskList.addTask(new Todo("buy groceries"));
+
+        ArrayList<Task> results = taskList.findTask("homework");
+
+        assertEquals(0, results.size());
     }
 }

@@ -1,10 +1,12 @@
-import kirkstein.parser.Parser;
-import kirkstein.exception.KirkSteinException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import kirkstein.exception.KirkSteinException;
+import kirkstein.parser.Parser;
 
 public class ParserTest {
 
