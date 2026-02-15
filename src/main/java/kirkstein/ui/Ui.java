@@ -5,122 +5,120 @@ import java.util.ArrayList;
 import kirkstein.task.Task;
 
 /**
- * Handles all user interface interactions
+ * Handles all user interface interactions and message formatting.
  */
 public class Ui {
-    private static final String LINE = "____________________________________________________________";
 
     /**
-     * Displays the welcome message
+     * Returns the welcome message.
+     *
+     * @return Welcome message string
      */
-    public void showWelcome() {
-        System.out.println(LINE);
-        System.out.println("Hello! I'm KirkStein");
-        System.out.println("Welcome to my island!");
-        System.out.println(LINE);
+    public String showWelcome() {
+        return """
+                Hello! I'm KirkStein
+                Welcome to my island!
+                """;
     }
 
     /**
-     * Displays the goodbye message
+     * Returns the goodbye message.
+     *
+     * @return Goodbye message string
      */
-    public void showGoodbye() {
-        System.out.println(LINE);
-        System.out.println("Bye! See you in the files.");
-        System.out.println(LINE);
+    public String showGoodbye() {
+        return "Bye! See you in the files.\n";
     }
 
     /**
-     * Displays the list of tasks
+     * Returns a formatted string displaying all tasks in the list.
      *
      * @param tasks The list of tasks to display
+     * @return Formatted task list string
      */
-    public void showTaskList(ArrayList<Task> tasks) {
-        System.out.println(LINE);
-        System.out.println("Here are your Epstein files:");
+    public String showTaskList(ArrayList<Task> tasks) {
+        StringBuilder result = new StringBuilder();
+        result.append("Here are your Epstein files:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i).toString());
+            result.append((i + 1)).append(".").append(tasks.get(i).toString()).append("\n");
         }
-        System.out.println(LINE);
+        return result.toString();
     }
 
     /**
-     * Displays a message confirming a task was added
+     * Returns a confirmation message for a newly added task.
      *
      * @param task The task that was added
-     * @param totalTasks The total number of tasks
+     * @param totalTasks The total number of tasks in the list
+     * @return Task added confirmation message
      */
-    public void showTaskAdded(Task task, int totalTasks) {
-        System.out.println(LINE);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task.toString());
-        System.out.println("Now you have " + totalTasks + " tasks in the list.");
-        System.out.println(LINE);
+    public String showTaskAdded(Task task, int totalTasks) {
+        return "Got it. I've added this task:\n"
+                + "  " + task.toString() + "\n"
+                + "Now you have " + totalTasks + " tasks in the list.\n";
     }
 
     /**
-     * Displays a message confirming a task was deleted
+     * Returns a confirmation message for a deleted task.
      *
-     * @param task The task to delete
-     * @param remainingTasks The total number of tasks remaining
+     * @param task The task that was deleted
+     * @param remainingTasks The number of tasks remaining in the list
+     * @return Task deleted confirmation message
      */
-    public void showTaskDeleted(Task task, int remainingTasks) {
-        System.out.println(LINE);
-        System.out.println("Noted. I've removed this file:");
-        System.out.println("  " + task.toString());
-        System.out.println("Now you have " + remainingTasks + " files in the list.");
-        System.out.println(LINE);
+    public String showTaskDeleted(Task task, int remainingTasks) {
+        return "Noted. I've removed this file:\n"
+                + "  " + task.toString() + "\n"
+                + "Now you have " + remainingTasks + " files in the list.\n";
     }
 
     /**
-     * Displays a message confirming a task was marked
+     * Returns a confirmation message for a task marked as done.
      *
-     * @param task The task to mark
+     * @param task The task that was marked
+     * @return Task marked confirmation message
      */
-    public void showTaskMarked(Task task) {
-        System.out.println(LINE);
-        System.out.println("Nice! I've marked this as redacted:");
-        System.out.println(task.toString());
-        System.out.println(LINE);
+    public String showTaskMarked(Task task) {
+        return "Nice! I've marked this as redacted:\n"
+                + task.toString() + "\n";
     }
 
     /**
-     * Displays a message confirming a task was unmarked
+     * Returns a confirmation message for a task unmarked as not done.
      *
-     * @param task The task to unmark
+     * @param task The task that was unmarked
+     * @return Task unmarked confirmation message
      */
-    public void showTaskUnmarked(Task task) {
-        System.out.println(LINE);
-        System.out.println("OK! I've unredacted this:");
-        System.out.println(task.toString());
-        System.out.println(LINE);
+    public String showTaskUnmarked(Task task) {
+        return "OK! I've unredacted this:\n"
+                + task.toString() + "\n";
     }
 
     /**
-     * Displays an error message
+     * Returns a formatted error message.
      *
      * @param message The error message to display
+     * @return Formatted error message string
      */
-    public void showError(String message) {
-        System.out.println(LINE);
-        System.out.println("OOPS!!! " + message);
-        System.out.println(LINE);
+    public String showError(String message) {
+        return "OOPS!!! " + message + "\n";
     }
 
     /**
-     * Displays the tasks whose description matches the search term
+     * Returns a formatted string displaying tasks that match the search criteria.
      *
-     * @param tasks Array list of tasks that matches the search term
+     * @param tasks List of tasks matching the search term
+     * @return Formatted search results string
      */
-    public void showFindResults(ArrayList<Task> tasks) {
-        System.out.println(LINE);
+    public String showFindResults(ArrayList<Task> tasks) {
+        StringBuilder result = new StringBuilder();
         if (tasks.isEmpty()) {
-            System.out.println("No matching tasks found in your Epstein files.");
+            result.append("No matching tasks found in your Epstein files.\n");
         } else {
-            System.out.println("Here are your searched Epstein files:");
+            result.append("Here are your searched Epstein files:\n");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println((i + 1) + "." + tasks.get(i).toString());
+                result.append((i + 1)).append(".").append(tasks.get(i).toString()).append("\n");
             }
         }
-        System.out.println(LINE);
+        return result.toString();
     }
 }

@@ -1,7 +1,6 @@
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import kirkstein.exception.KirkSteinException;
 import kirkstein.parser.Parser;
@@ -19,17 +18,14 @@ import kirkstein.ui.Ui;
  * todos, deadlines, and events through a command-line interface
  */
 public class KirkStein {
-    private static Storage storage;
-    private static Ui ui;
-    private static TaskList taskList;
+    private Storage storage;
+    private Ui ui;
+    private TaskList taskList;
 
     /**
-     * Entry point for the KirkStein application
-     * Initializes the chatbot and starts the main command loop
-     *
-     * @param args Command-line arguments (not used)
+     * Constructor for GUI mode
      */
-    public static void main(String[] args) {
+    public KirkStein() {
         ui = new Ui();
 
         File directory = new File("data");
@@ -38,132 +34,127 @@ public class KirkStein {
         }
         storage = new Storage("data/tasks.txt");
         taskList = new TaskList(storage.loadTask());
-
-        Scanner input = new Scanner(System.in);
-        ui.showWelcome();
-
-        // Initial input
-        String userInput = "";
-        // Loop
-        while (!userInput.equals("bye")) {
-            // Get input
-            userInput = input.nextLine();
-            // End loop
-            if (userInput.equals("bye")) {
-                ui.showGoodbye();
-            } else if (userInput.equals("list")) { // Display list
-                ui.showTaskList(taskList.getTasks());
-            } else if (userInput.startsWith("mark")) { // Mark item
-                handleMark(userInput);
-            } else if (userInput.startsWith("unmark")) { // Unmark item
-                handleUnmark(userInput);
-            } else if (userInput.startsWith("delete")) { // Delete item
-                handleDelete(userInput);
-            } else if (userInput.startsWith("find")) { // Find item
-                handleFind(userInput);
-            } else { // Add to list
-                handleAdd(userInput);
-            }
-        }
-        input.close();
     }
 
-    private static void handleMark(String userInput) {
+    /**
+     * Generates a response for the user's input
+     *
+     * @param input User's input command
+     * @return Response string
+     */
+    public String getResponse(String input) {
+        if (input.equals("bye")) {
+            return ui.showGoodbye();
+        } else if (input.equals("list")) {
+            return ui.showTaskList(taskList.getTasks());
+        } else if (input.startsWith("mark")) {
+            return handleMark(input);
+        } else if (input.startsWith("unmark")) {
+            return handleUnmark(input);
+        } else if (input.startsWith("delete")) {
+            return handleDelete(input);
+        } else if (input.startsWith("find")) {
+            return handleFind(input);
+        } else {
+            return handleAdd(input);
+        }
+    }
+
+    private String handleMark(String userInput) {
         try {
             int taskNumber = Parser.parseTaskNumber(userInput, 5);
             taskList.markTask(taskNumber - 1);
             storage.saveTask(taskList.getTasks());
-            ui.showTaskMarked(taskList.getTask(taskNumber - 1));
+            return ui.showTaskMarked(taskList.getTask(taskNumber - 1));
         } catch (KirkSteinException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         } catch (Exception e) {
-            ui.showError("Invalid mark command! Use: mark <task number>");
+            return ui.showError("Invalid mark command! Use: mark <task number>");
         }
     }
 
-    private static void handleUnmark(String userInput) {
+    private String handleUnmark(String userInput) {
         try {
             int taskNumber = Parser.parseTaskNumber(userInput, 7);
             taskList.unmarkTask(taskNumber - 1);
             storage.saveTask(taskList.getTasks());
-            ui.showTaskUnmarked(taskList.getTask(taskNumber - 1));
+            return ui.showTaskUnmarked(taskList.getTask(taskNumber - 1));
         } catch (KirkSteinException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         } catch (Exception e) {
-            ui.showError("Invalid unmark command! Use: unmark <task number>");
+            return ui.showError("Invalid unmark command! Use: unmark <task number>");
         }
     }
 
-    private static void handleDelete(String userInput) {
+    private String handleDelete(String userInput) {
         try {
             int taskNumber = Parser.parseTaskNumber(userInput, 7);
             if (taskNumber < 1 || taskNumber > taskList.size()) {
-                ui.showError("Invalid Epstein file page!");
-                return;
+                return ui.showError("Invalid Epstein file page!");
             }
             Task removedTask = taskList.removeTask(taskNumber - 1);
             storage.saveTask(taskList.getTasks());
-            ui.showTaskDeleted(removedTask, taskList.size());
+            return ui.showTaskDeleted(removedTask, taskList.size());
         } catch (KirkSteinException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         } catch (Exception e) {
-            ui.showError("Invalid delete command! Use: delete <task number>");
+            return ui.showError("Invalid delete command! Use: delete <task number>");
         }
     }
 
-    private static void handleFind(String userInput) {
+    private String handleFind(String userInput) {
         try {
             String keyword = Parser.parseFindTerm(userInput);
             ArrayList<Task> matchingTasks = taskList.findTask(keyword);
-            ui.showFindResults(matchingTasks);
+            return ui.showFindResults(matchingTasks);
         } catch (KirkSteinException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
     }
 
-    private static void handleAdd(String userInput) {
+    private String handleAdd(String userInput) {
         if (userInput.startsWith("todo ")) {
-            handleTodo(userInput);
+            return handleTodo(userInput);
         } else if (userInput.startsWith("deadline ")) {
-            handleDeadline(userInput);
+            return handleDeadline(userInput);
         } else if (userInput.startsWith("event ")) {
-            handleEvent(userInput);
+            return handleEvent(userInput);
         } else if (userInput.startsWith("todo")) {
-            ui.showError("Epstein todo description cannot be empty!");
+            return ui.showError("Epstein todo description cannot be empty!");
         } else if (userInput.startsWith("deadline")) {
-            ui.showError("Invalid kirk deadline format! Use: deadline <task> /by <date>");
+            return ui.showError("Invalid kirk deadline format! Use: deadline <task> /by <date>");
         } else if (userInput.startsWith("event")) {
-            ui.showError("Invalid diddy party format! Use: event <task> /from <start> /to <end>");
+            return ui.showError("Invalid diddy party format! Use: event <task> /from <start> /to <end>");
         } else {
-            ui.showError("That can't be part of the Epstein files diddy blud!"
+            return ui.showError("That can't be part of the Epstein files diddy blud!\n"
                     + "It has to start with todo, deadline, or event");
         }
     }
 
-    private static void handleTodo(String userInput) {
+    private String handleTodo(String userInput) {
         try {
             String description = Parser.parseTodoDescription(userInput);
             Task task = new Todo(description);
-            addTask(task);
+            return addTask(task);
         } catch (KirkSteinException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
     }
 
-    private static void handleDeadline(String userInput) {
+    private String handleDeadline(String userInput) {
         try {
             String[] parts = Parser.parseDeadline(userInput);
             String description = parts[0];
             LocalDate byDate = Parser.parseDate(parts[1]);
 
             Task task = new Deadline(description, byDate);
-            addTask(task);
+            return addTask(task);
         } catch (KirkSteinException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
     }
 
-    private static void handleEvent(String userInput) {
+    private String handleEvent(String userInput) {
         try {
             String[] parts = Parser.parseEvent(userInput);
             String description = parts[0];
@@ -171,15 +162,15 @@ public class KirkStein {
             LocalDate toDate = Parser.parseDate(parts[2]);
 
             Task task = new Event(description, fromDate, toDate);
-            addTask(task);
+            return addTask(task);
         } catch (KirkSteinException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
     }
 
-    private static void addTask(Task task) {
+    private String addTask(Task task) {
         taskList.addTask(task);
         storage.saveTask(taskList.getTasks());
-        ui.showTaskAdded(task, taskList.size());
+        return ui.showTaskAdded(task, taskList.size());
     }
 }
