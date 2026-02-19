@@ -18,12 +18,16 @@ import kirkstein.ui.Ui;
  * todos, deadlines, and events through a command-line interface
  */
 public class KirkStein {
+    private static final int MARK_PREFIX_LENGTH = 5; // "mark "
+    private static final int UNMARK_PREFIX_LENGTH = 7; // "unmark "
+    private static final int DELETE_PREFIX_LENGTH = 7; // "delete "
+
     private Storage storage;
     private Ui ui;
     private TaskList taskList;
 
     /**
-     * Constructor for GUI mode
+     * Initializes KirkStein with storage, task list, and UI components
      */
     public KirkStein() {
         ui = new Ui();
@@ -65,7 +69,7 @@ public class KirkStein {
 
     private String handleMark(String userInput) {
         try {
-            int taskNumber = Parser.parseTaskNumber(userInput, 5);
+            int taskNumber = Parser.parseTaskNumber(userInput, MARK_PREFIX_LENGTH);
             taskList.markTask(taskNumber - 1);
             storage.saveTask(taskList.getTasks());
             return ui.showTaskMarked(taskList.getTask(taskNumber - 1));
@@ -78,7 +82,7 @@ public class KirkStein {
 
     private String handleUnmark(String userInput) {
         try {
-            int taskNumber = Parser.parseTaskNumber(userInput, 7);
+            int taskNumber = Parser.parseTaskNumber(userInput, UNMARK_PREFIX_LENGTH);
             taskList.unmarkTask(taskNumber - 1);
             storage.saveTask(taskList.getTasks());
             return ui.showTaskUnmarked(taskList.getTask(taskNumber - 1));
@@ -91,7 +95,7 @@ public class KirkStein {
 
     private String handleDelete(String userInput) {
         try {
-            int taskNumber = Parser.parseTaskNumber(userInput, 7);
+            int taskNumber = Parser.parseTaskNumber(userInput, DELETE_PREFIX_LENGTH);
             if (taskNumber < 1 || taskNumber > taskList.size()) {
                 return ui.showError("Invalid Epstein file page!");
             }
@@ -122,15 +126,16 @@ public class KirkStein {
             return handleDeadline(userInput);
         } else if (userInput.startsWith("event ")) {
             return handleEvent(userInput);
-        } else if (userInput.startsWith("todo")) {
+        }
+
+        if (userInput.equals("todo") || userInput.startsWith("todo ")) {
             return ui.showError("Epstein todo description cannot be empty!");
-        } else if (userInput.startsWith("deadline")) {
+        } else if (userInput.equals("deadline") || userInput.startsWith("deadline ")) {
             return ui.showError("Invalid kirk deadline format! Use: deadline <task> /by <date>");
-        } else if (userInput.startsWith("event")) {
+        } else if (userInput.equals("event") || userInput.startsWith("event ")) {
             return ui.showError("Invalid diddy party format! Use: event <task> /from <start> /to <end>");
         } else {
-            return ui.showError("That can't be part of the Epstein files diddy blud!\n"
-                    + "It has to start with todo, deadline, or event");
+            return ui.showError("Unknown command! It has to start with todo, deadline, or event");
         }
     }
 

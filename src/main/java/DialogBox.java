@@ -65,20 +65,7 @@ public class DialogBox extends HBox {
      * @return A flipped DialogBox instance for KirkStein
      */
     public static DialogBox getKirkSteinDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
-    }
-
-    /**
-     * Creates a dialog box for bot messages with image on the left.
-     *
-     * @param text The message text to display
-     * @param img The bot's display image
-     * @return A flipped DialogBox instance for the bot
-     */
-    public static DialogBox getBotDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.flip();
         return db;
     }

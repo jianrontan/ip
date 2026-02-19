@@ -1,9 +1,13 @@
 package kirkstein.task;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a task with a description and completion status
  */
 public class Task {
+    protected static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
+
     private final String description;
     private TaskStatus status;
 
