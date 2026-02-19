@@ -18,6 +18,7 @@ public class TaskList {
      * @param tasks The initial list of tasks
      */
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null : "Task list cannot be null";
         list = tasks;
     }
 
@@ -74,7 +75,12 @@ public class TaskList {
      * @return The removed task
      */
     public Task removeTask(int index) {
-        return list.remove(index);
+        assert index >= 0 && index < list.size() : "Index out of bounds: " + index;
+        int sizeBefore = list.size();
+        Task removed = list.remove(index);
+        assert list.size() == sizeBefore - 1 : "Task was not removed correctly";
+        assert removed != null : "Removed task should not be null";
+        return removed;
     }
 
     /**
@@ -83,7 +89,10 @@ public class TaskList {
      * @param task The task to add
      */
     public void addTask(Task task) {
+        assert task != null : "Cannot add null task";
+        int sizeBefore = list.size();
         list.add(task);
+        assert list.size() == sizeBefore + 1 : "Task was not added correctly";
     }
 
     /**
