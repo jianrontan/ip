@@ -34,6 +34,9 @@ public class KirkStein {
         }
         storage = new Storage("data/tasks.txt");
         taskList = new TaskList(storage.loadTask());
+        assert storage != null : "Storage failed to initialize";
+        assert taskList != null : "TaskList failed to initialize";
+        assert ui != null : "Ui failed to initialize";
     }
 
     /**
