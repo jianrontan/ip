@@ -58,6 +58,7 @@ public class Parser {
         if (parts.length != 2) {
             throw new KirkSteinException("Invalid kirk deadline format! Use: deadline <task> /by <date>");
         }
+        assert parts[0] != null && parts[1] != null : "Parsed deadline parts should not be null";
         return new String[]{parts[0].trim(), parts[1].trim()};
     }
 
