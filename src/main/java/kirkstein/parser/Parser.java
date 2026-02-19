@@ -10,6 +10,10 @@ import kirkstein.exception.KirkSteinException;
  * Handles parsing of user input commands and data.
  */
 public class Parser {
+    private static final int TODO_PREFIX_LENGTH = 5; // "todo "
+    private static final int FIND_PREFIX_LENGTH = 5; // "find "
+    private static final int DEADLINE_PREFIX_LENGTH = 9; // "deadline "
+    private static final int EVENT_PREFIX_LENGTH = 6; // "event "
 
     /**
      * Parses the task number from user input
@@ -35,11 +39,11 @@ public class Parser {
      * @throws KirkSteinException If the description is empty.
      */
     public static String parseTodoDescription(String input) throws KirkSteinException {
-        if (input.length() <= 5) {
+        if (input.length() <= TODO_PREFIX_LENGTH) {
             throw new KirkSteinException("Epstein todo description cannot be empty!");
         }
 
-        String description = input.substring(5).trim();
+        String description = input.substring(TODO_PREFIX_LENGTH).trim();
         if (description.isEmpty()) {
             throw new KirkSteinException("Epstein todo description cannot be empty!");
         }
@@ -54,7 +58,7 @@ public class Parser {
      * @throws KirkSteinException If the format is invalid.
      */
     public static String[] parseDeadline(String input) throws KirkSteinException {
-        String[] parts = input.substring(9).split(" /by ");
+        String[] parts = input.substring(DEADLINE_PREFIX_LENGTH).split(" /by ");
         if (parts.length != 2) {
             throw new KirkSteinException("Invalid kirk deadline format! Use: deadline <task> /by <date>");
         }
@@ -70,7 +74,7 @@ public class Parser {
      * @throws KirkSteinException If the format is invalid.
      */
     public static String[] parseEvent(String input) throws KirkSteinException {
-        String remaining = input.substring(6);
+        String remaining = input.substring(EVENT_PREFIX_LENGTH).trim();
         String[] descriptionAndTime = remaining.split(" /from ");
         if (descriptionAndTime.length != 2) {
             throw new KirkSteinException("Invalid diddy party format! Use: event <task> /from <start> /to <end>");
@@ -111,11 +115,11 @@ public class Parser {
      * @throws KirkSteinException Throws exception when search is invalid (empty)
      */
     public static String parseFindTerm(String input) throws KirkSteinException {
-        if (input.length() <= 5) {
+        if (input.length() <= FIND_PREFIX_LENGTH) {
             throw new KirkSteinException("Search term cannot be empty!");
         }
 
-        String keyword = input.substring(5).trim();
+        String keyword = input.substring(FIND_PREFIX_LENGTH).trim();
         if (keyword.isEmpty()) {
             throw new KirkSteinException("Search term cannot be empty!");
         }

@@ -19,6 +19,11 @@ import kirkstein.task.Todo;
  * Handles storage of tasks
  */
 public class Storage {
+    private static final int TASK_TYPE_INDEX = 1;
+    private static final int TASK_STATUS_INDEX = 4;
+    private static final int TASK_DESCRIPTION_START = 7;
+    private static final char MARKED_CHAR = 'X';
+
     private final String filePath;
 
     /**
@@ -58,18 +63,19 @@ public class Storage {
         try (Scanner scanner = new Scanner(new File(filePath))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                char taskType = line.charAt(1);
-                boolean marked = line.charAt(4) == 'X';
-                String taskDescription = line.substring(7);
+                char taskType = line.charAt(TASK_TYPE_INDEX);
+                boolean marked = line.charAt(TASK_STATUS_INDEX) == 'X';
+                String taskDescription = line.substring(TASK_DESCRIPTION_START).trim();
 
-                if (taskType == 'T') {
+                if (taskType == Todo.TASK_TYPE) {
                     Todo todo = new Todo(taskDescription);
                     if (marked) {
                         todo.markTrue();
                     }
                     tasks.add(todo);
-
-                } else if (taskType == 'D') {
+                    continue;
+                }
+                if (taskType == Deadline.TASK_TYPE) {
                     String[] deadlineParts = taskDescription.split(" \\(by: ");
                     String description = deadlineParts[0];
                     String dateStr = deadlineParts[1].replace(")", "");
@@ -81,8 +87,9 @@ public class Storage {
                         deadline.markTrue();
                     }
                     tasks.add(deadline);
-
-                } else if (taskType == 'E') {
+                    continue;
+                }
+                if (taskType == Event.TASK_TYPE) {
                     String[] eventParts = taskDescription.split(" \\(from: ");
                     String eventDescription = eventParts[0].trim();
                     String[] eventDatesParts = eventParts[1].split(" to: ");
@@ -100,7 +107,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            // File doesn't exist on first run - return empty list
+            System.err.println("Warning: Failed to save tasks - " + e.getMessage());
         }
         return tasks;
     }
