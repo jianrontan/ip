@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import kirkstein.task.Deadline;
 import kirkstein.task.Event;
@@ -41,11 +42,12 @@ public class Storage {
      */
     public void saveTask(ArrayList<Task> tasks) {
         try (FileWriter writer = new FileWriter(filePath)) {
-            for (Task task : tasks) {
-                writer.write(task.toString() + "\n");
-            }
+            String content = tasks.stream()
+                    .map(task -> task.toString() + "\n")
+                    .collect(Collectors.joining());
+            writer.write(content);
         } catch (IOException e) {
-            // Fail silently if unable to save tasks
+            System.err.println("Warning: Failed to save tasks - " + e.getMessage());
         }
     }
 

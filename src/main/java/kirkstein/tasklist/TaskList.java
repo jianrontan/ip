@@ -1,6 +1,7 @@
 package kirkstein.tasklist;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import kirkstein.task.Task;
 
@@ -101,12 +102,9 @@ public class TaskList {
      * @return ArrayList of tasks that match the keyword.
      */
     public ArrayList<Task> findTask(String searchTerm) {
-        ArrayList<Task> result = new ArrayList<>();
-        for (Task task : list) {
-            if (task.getDescription().toLowerCase().contains(searchTerm.toLowerCase())) {
-                result.add(task);
-            }
-        }
-        return result;
+        return list.stream()
+                .filter(task -> task.getDescription().toLowerCase()
+                        .contains(searchTerm.toLowerCase()))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

@@ -1,6 +1,8 @@
 package kirkstein.ui;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import kirkstein.task.Task;
 
@@ -37,12 +39,10 @@ public class Ui {
      * @return Formatted task list string
      */
     public String showTaskList(ArrayList<Task> tasks) {
-        StringBuilder result = new StringBuilder();
-        result.append("Here are your Epstein files:\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            result.append((i + 1)).append(".").append(tasks.get(i).toString()).append("\n");
-        }
-        return result.toString();
+        String taskLines = IntStream.range(0, tasks.size())
+                .mapToObj(i -> (i + 1) + "." + tasks.get(i).toString() + "\n")
+                .collect(Collectors.joining());
+        return "Here are your Epstein files:\n" + taskLines;
     }
 
     /**
@@ -110,15 +110,12 @@ public class Ui {
      * @return Formatted search results string
      */
     public String showFindResults(ArrayList<Task> tasks) {
-        StringBuilder result = new StringBuilder();
         if (tasks.isEmpty()) {
-            result.append("No matching tasks found in your Epstein files.\n");
-        } else {
-            result.append("Here are your searched Epstein files:\n");
-            for (int i = 0; i < tasks.size(); i++) {
-                result.append((i + 1)).append(".").append(tasks.get(i).toString()).append("\n");
-            }
+            return "No matching tasks found in your Epstein files.\n";
         }
-        return result.toString();
+        String taskLines = IntStream.range(0, tasks.size())
+                .mapToObj(i -> (i + 1) + "." + tasks.get(i).toString() + "\n")
+                .collect(Collectors.joining());
+        return "Here are your searched Epstein files:\n" + taskLines;
     }
 }
