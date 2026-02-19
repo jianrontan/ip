@@ -1,12 +1,12 @@
 package kirkstein.task;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a task with a deadline
  */
 public class Deadline extends Task {
+    public static final char TASK_TYPE = 'D';
 
     protected LocalDate by;
 
@@ -23,7 +23,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return "[D]" + super.toString() + " (by: " + by.format(formatter) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DATE_FORMATTER) + ")";
     }
 }

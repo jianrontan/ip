@@ -1,12 +1,12 @@
 package kirkstein.task;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a task that is an event with a date range
  */
 public class Event extends Task {
+    public static final char TASK_TYPE = 'E';
 
     protected LocalDate from;
     protected LocalDate to;
@@ -26,9 +26,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         return "[E]" + super.toString()
-                + " (from: " + from.format(formatter)
-                + " to: " + to.format(formatter) + ")";
+                + " (from: " + from.format(DATE_FORMATTER)
+                + " to: " + to.format(DATE_FORMATTER) + ")";
     }
 }
