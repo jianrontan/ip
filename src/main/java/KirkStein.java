@@ -177,8 +177,14 @@ public class KirkStein {
     }
 
     private String addTask(Task task) {
+        ArrayList<Task> clashes = taskList.getClashingTasks(task);
         taskList.addTask(task);
         storage.saveTask(taskList.getTasks());
-        return ui.showTaskAdded(task, taskList.size());
+
+        String addedMessage = ui.showTaskAdded(task, taskList.size());
+        if (!clashes.isEmpty()) {
+            return ui.showClashWarning(clashes) + addedMessage;
+        }
+        return addedMessage;
     }
 }

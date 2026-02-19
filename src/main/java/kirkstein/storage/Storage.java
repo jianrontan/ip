@@ -64,7 +64,7 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 char taskType = line.charAt(TASK_TYPE_INDEX);
-                boolean marked = line.charAt(TASK_STATUS_INDEX) == 'X';
+                boolean marked = line.charAt(TASK_STATUS_INDEX) == MARKED_CHAR;
                 String taskDescription = line.substring(TASK_DESCRIPTION_START).trim();
 
                 if (taskType == Todo.TASK_TYPE) {

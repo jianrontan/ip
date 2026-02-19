@@ -118,4 +118,20 @@ public class Ui {
                 .collect(Collectors.joining());
         return "Here are your searched Epstein files:\n" + taskLines;
     }
+
+    /**
+     * Shows warning when dates clash
+     *
+     * @param clashes List of clashing Tasks.
+     * @return String of clashing Tasks.
+     */
+    public String showClashWarning(ArrayList<Task> clashes) {
+        StringBuilder result = new StringBuilder();
+        result.append("Warning! This task clashes with:\n");
+        for (Task task : clashes) {
+            result.append("  ").append(task.toString()).append("\n");
+        }
+        result.append("Task has been added anyway.\n");
+        return result.toString();
+    }
 }
