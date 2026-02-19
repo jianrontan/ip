@@ -1,11 +1,14 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import kirkstein.task.Deadline;
+import kirkstein.task.Event;
 import kirkstein.task.Task;
 import kirkstein.task.Todo;
 import kirkstein.tasklist.TaskList;
@@ -89,5 +92,91 @@ public class TaskListTest {
         ArrayList<Task> results = taskList.findTask("homework");
 
         assertEquals(0, results.size());
+    }
+
+    // Event vs Event clashes
+    @Test
+    public void getClashingTasks_overlappingEvents_returnsClash() {
+        LocalDate from1 = LocalDate.of(2025, 12, 1);
+        LocalDate to1 = LocalDate.of(2025, 12, 5);
+        LocalDate from2 = LocalDate.of(2025, 12, 3);
+        LocalDate to2 = LocalDate.of(2025, 12, 7);
+        taskList.addTask(new Event("meeting", from1, to1));
+
+        ArrayList<Task> clashes = taskList.getClashingTasks(new Event("conference", from2, to2));
+
+        assertEquals(1, clashes.size());
+    }
+
+    @Test
+    public void getClashingTasks_nonOverlappingEvents_returnsEmpty() {
+        LocalDate from1 = LocalDate.of(2025, 12, 1);
+        LocalDate to1 = LocalDate.of(2025, 12, 3);
+        LocalDate from2 = LocalDate.of(2025, 12, 4);
+        LocalDate to2 = LocalDate.of(2025, 12, 7);
+        taskList.addTask(new Event("meeting", from1, to1));
+
+        ArrayList<Task> clashes = taskList.getClashingTasks(new Event("conference", from2, to2));
+
+        assertEquals(0, clashes.size());
+    }
+
+    // Deadline vs Deadline clashes
+    @Test
+    public void getClashingTasks_sameDeadlines_returnsClash() {
+        LocalDate date = LocalDate.of(2025, 12, 1);
+        taskList.addTask(new Deadline("assignment", date));
+
+        ArrayList<Task> clashes = taskList.getClashingTasks(new Deadline("project", date));
+
+        assertEquals(1, clashes.size());
+    }
+
+    @Test
+    public void getClashingTasks_differentDeadlines_returnsEmpty() {
+        taskList.addTask(new Deadline("assignment", LocalDate.of(2025, 12, 1)));
+
+        ArrayList<Task> clashes = taskList.getClashingTasks(
+                new Deadline("project", LocalDate.of(2025, 12, 2)));
+
+        assertEquals(0, clashes.size());
+    }
+
+    // Deadline within Event clashes
+    @Test
+    public void getClashingTasks_deadlineWithinEvent_returnsClash() {
+        LocalDate from = LocalDate.of(2025, 12, 1);
+        LocalDate to = LocalDate.of(2025, 12, 5);
+        taskList.addTask(new Event("holiday", from, to));
+
+        ArrayList<Task> clashes = taskList.getClashingTasks(
+                new Deadline("assignment", LocalDate.of(2025, 12, 3)));
+
+        assertEquals(1, clashes.size());
+    }
+
+    @Test
+    public void getClashingTasks_deadlineOutsideEvent_returnsEmpty() {
+        LocalDate from = LocalDate.of(2025, 12, 1);
+        LocalDate to = LocalDate.of(2025, 12, 5);
+        taskList.addTask(new Event("holiday", from, to));
+
+        ArrayList<Task> clashes = taskList.getClashingTasks(
+                new Deadline("assignment", LocalDate.of(2025, 12, 6)));
+
+        assertEquals(0, clashes.size());
+    }
+
+    // Todo should never clash
+    @Test
+    public void getClashingTasks_todoTask_returnsEmpty() {
+        LocalDate from = LocalDate.of(2025, 12, 1);
+        LocalDate to = LocalDate.of(2025, 12, 5);
+        taskList.addTask(new Event("holiday", from, to));
+        taskList.addTask(new Deadline("assignment", LocalDate.of(2025, 12, 3)));
+
+        ArrayList<Task> clashes = taskList.getClashingTasks(new Todo("read book"));
+
+        assertEquals(0, clashes.size());
     }
 }

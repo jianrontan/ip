@@ -24,6 +24,24 @@ public class Event extends Task {
         this.to = to;
     }
 
+    /**
+     * Returns from date
+     *
+     * @return Date object of from.
+     */
+    public LocalDate getFrom() {
+        return from;
+    }
+
+    /**
+     * Returns to date
+     *
+     * @return Date object of to.
+     */
+    public LocalDate getTo() {
+        return to;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString()

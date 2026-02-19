@@ -3,6 +3,8 @@ package kirkstein.tasklist;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import kirkstein.task.Deadline;
+import kirkstein.task.Event;
 import kirkstein.task.Task;
 
 
@@ -106,5 +108,43 @@ public class TaskList {
                 .filter(task -> task.getDescription().toLowerCase()
                         .contains(searchTerm.toLowerCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Get the list of tasks whose dates clash with the new task added
+     *
+     * @param newTask New task added.
+     * @return Returns array of tasks whose dates clash.
+     */
+    public ArrayList<Task> getClashingTasks(Task newTask) {
+        return list.stream()
+                .filter(existing -> clashesWith(newTask, existing))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    private boolean clashesWith(Task newTask, Task existing) {
+        if (newTask instanceof Event && existing instanceof Event) {
+            return eventsClash((Event) newTask, (Event) existing);
+        } else if (newTask instanceof Deadline && existing instanceof Deadline) {
+            return deadlinesClash((Deadline) newTask, (Deadline) existing);
+        } else if (newTask instanceof Event && existing instanceof Deadline) {
+            return deadlineWithinEvent((Deadline) existing, (Event) newTask);
+        } else if (newTask instanceof Deadline && existing instanceof Event) {
+            return deadlineWithinEvent((Deadline) newTask, (Event) existing);
+        }
+        return false;
+    }
+
+    private boolean eventsClash(Event a, Event b) {
+        return !a.getTo().isBefore(b.getFrom()) && !b.getTo().isBefore(a.getFrom());
+    }
+
+    private boolean deadlinesClash(Deadline a, Deadline b) {
+        return a.getBy().equals(b.getBy());
+    }
+
+    private boolean deadlineWithinEvent(Deadline deadline, Event event) {
+        return !deadline.getBy().isBefore(event.getFrom())
+                && !deadline.getBy().isAfter(event.getTo());
     }
 }
