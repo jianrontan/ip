@@ -36,11 +36,17 @@ public class KirkStein {
         if (!directory.exists()) {
             directory.mkdir();
         }
-        storage = new Storage("data/tasks.txt");
-        taskList = new TaskList(storage.loadTask());
-        assert storage != null : "Storage failed to initialize";
-        assert taskList != null : "TaskList failed to initialize";
+        /**
+         * Claude Sonnet 4.6 Extended Thinking suggested that assertions
+         * coming after the objects are already used making them useless.
+         * We changed the order such that storage is checked if it has been
+         * initalised before using it in line 42.
+         */
         assert ui != null : "Ui failed to initialize";
+        storage = new Storage("data/tasks.txt");
+        assert storage != null : "Storage failed to initialize";
+        taskList = new TaskList(storage.loadTask());
+        assert taskList != null : "TaskList failed to initialize";
     }
 
     /**

@@ -135,8 +135,14 @@ public class TaskList {
         return false;
     }
 
+    /**
+     * Claude Sonnet 4.6 Extended Thinking suggested to refactor the earlier complicated expression
+     * to extract out the booleans making the code more readable.
+     */
     private boolean eventsClash(Event a, Event b) {
-        return !a.getTo().isBefore(b.getFrom()) && !b.getTo().isBefore(a.getFrom());
+        boolean aEndsBeforeB = a.getTo().isBefore(b.getFrom());
+        boolean bEndsBeforeA = b.getTo().isBefore(a.getFrom());
+        return !aEndsBeforeB && !bEndsBeforeA;
     }
 
     private boolean deadlinesClash(Deadline a, Deadline b) {
