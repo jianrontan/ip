@@ -58,6 +58,8 @@ public class KirkStein {
     public String getResponse(String input) {
         if (input.equals("bye")) {
             return ui.showGoodbye();
+        } else if (input.equals("help")) {
+            return ui.showHelp();
         } else if (input.equals("list")) {
             return ui.showTaskList(taskList.getTasks());
         } else if (input.startsWith("mark")) {

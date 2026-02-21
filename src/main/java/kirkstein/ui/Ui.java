@@ -120,7 +120,7 @@ public class Ui {
     }
 
     /**
-     * Shows warning when dates clash
+     * Returns string for warning when dates clash
      *
      * @param clashes List of clashing Tasks.
      * @return String of clashing Tasks.
@@ -133,5 +133,25 @@ public class Ui {
         }
         result.append("Task has been added anyway.\n");
         return result.toString();
+    }
+
+    /**
+     * String for commands when user requests help
+     *
+     * @return String of commands.
+     */
+    public String showHelp() {
+        return """
+            Here are the available commands:
+            todo <description> - Adds a todo task
+            deadline <description> /by <date> - Adds a deadline (yyyy/MM/dd or dd/MM/yyyy)
+            event <description> /from <date> /to <date> - Adds an event
+            list - Lists all tasks
+            mark <number> - Marks a task as done
+            unmark <number> - Unmarks a task
+            find <keyword> - Finds tasks by keyword
+            delete <number> - Deletes a task
+            bye - Exits the app
+            """;
     }
 }
