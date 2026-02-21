@@ -36,7 +36,7 @@ public class KirkStein {
         if (!directory.exists()) {
             directory.mkdir();
         }
-        /**
+        /*
          * Claude Sonnet 4.6 Extended Thinking suggested that assertions
          * coming after the objects are already used making them useless.
          * We changed the order such that storage is checked if it has been
